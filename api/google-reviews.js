@@ -1,6 +1,6 @@
 /**
- * Vercel serverless function — fetches real Google Business Profile reviews
- * Uses OAuth 2.0 with offline refresh token to get a fresh access token
+ * Vercel serverless function — fetches real Google reviews via Places API
+ * Uses GOOGLE_MAPS_API_KEY env variable
  */
 
 export default async function handler(req, res) {
@@ -10,79 +10,41 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end()
 
   try {
-    // Step 1: Exchange refresh token for access token
-    const tokenRes = await fetch('https://oauth2.googleapis.com/token', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        client_id:     process.env.GOOGLE_CLIENT_ID,
-        client_secret: process.env.GOOGLE_CLIENT_SECRET,
-        refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
-        grant_type:    'refresh_token',
-      }),
-    })
+    const apiKey  = process.env.GOOGLE_MAPS_API_KEY
+    const placeId = process.env.GOOGLE_PLACE_ID || 'ChIJN1t_tDeuEmsRUsoyG83frY4' // fallback
 
-    const tokenData = await tokenRes.json()
-    if (!tokenData.access_token) {
-      console.error('Token error:', tokenData)
-      return res.status(500).json({ error: 'Failed to get access token', detail: tokenData })
+    // Fetch place details including reviews
+    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,user_ratings_total,reviews&reviews_sort=newest&key=${apiKey}&language=en`
+
+    const r = await fetch(url)
+    const data = await r.json()
+
+    if (data.status !== 'OK') {
+      console.error('Places API error:', data)
+      return res.status(500).json({ error: data.status, detail: data.error_message })
     }
 
-    const accessToken = tokenData.access_token
-    const accountId  = process.env.GOOGLE_ACCOUNT_ID   // e.g. accounts/123456789
-    const locationId = process.env.GOOGLE_LOCATION_ID  // e.g. locations/8639322241901481078
+    const place = data.result
 
-    // Step 2: Fetch reviews from Google Business Profile API
-    const reviewsRes = await fetch(
-      `https://mybusiness.googleapis.com/v4/${accountId}/${locationId}/reviews?pageSize=50&orderBy=updateTime%20desc`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    )
-
-    const reviewsData = await reviewsRes.json()
-
-    if (!reviewsRes.ok) {
-      console.error('Reviews API error:', reviewsData)
-      return res.status(reviewsRes.status).json({ error: 'Failed to fetch reviews', detail: reviewsData })
-    }
-
-    // Step 3: Transform to a clean format
-    const reviews = (reviewsData.reviews || []).map(r => ({
-      id:          r.reviewId,
-      name:        r.reviewer?.displayName || 'Anonymous',
-      profilePhoto:r.reviewer?.profilePhotoUrl || null,
-      rating:      starRating(r.starRating),
-      text:        r.comment || '',
-      date:        r.updateTime,
-      reply:       r.reviewReply?.comment || null,
+    const reviews = (place.reviews || []).map(r => ({
+      id:           r.time,
+      name:         r.author_name,
+      profilePhoto: r.profile_photo_url || null,
+      rating:       r.rating,
+      text:         r.text,
+      date:         new Date(r.time * 1000).toLocaleString('en-US', { month: 'long', year: 'numeric' }),
     }))
 
-    const summary = {
-      totalReviews:   reviewsData.totalReviewCount || reviews.length,
-      averageRating:  reviewsData.averageRating || calcAvg(reviews),
-    }
-
-    return res.json({ reviews, summary })
+    return res.json({
+      reviews,
+      summary: {
+        averageRating: place.rating,
+        totalReviews:  place.user_ratings_total,
+      }
+    })
 
   } catch (err) {
     console.error('Google Reviews error:', err)
     return res.status(500).json({ error: err.message })
   }
-}
-
-function starRating(str) {
-  const map = {
-    ONE: 1, TWO: 2, THREE: 3, FOUR: 4, FIVE: 5,
-    STAR_RATING_UNSPECIFIED: 0,
-  }
-  return map[str] ?? 0
-}
-
-function calcAvg(reviews) {
-  if (!reviews.length) return 0
-  return (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1)
 }
