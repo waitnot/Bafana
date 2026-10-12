@@ -6,9 +6,10 @@ import brandText from '../assets/brand-text.png'
 import s from './Navbar.module.css'
 
 const links = [
-  { label: 'Amenities',  path: '/amenities' },
-  { label: 'Our Story',  path: '/about' },
-  { label: 'Contact',    path: '/contact' },
+  { label: 'Home',      path: '/' },
+  { label: 'Amenities', path: '/amenities' },
+  { label: 'About',     path: '/about' },
+  { label: 'Contact',   path: '/contact' },
 ]
 
 export default function Navbar({ onBook }) {
