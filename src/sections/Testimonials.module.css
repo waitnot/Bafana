@@ -24,9 +24,9 @@
 .oDot  { width:5px; height:5px; background:var(--gold); transform:rotate(45deg); flex-shrink:0; }
 
 .eyebrow {
-  font-size:.82rem; font-weight:600;
-  letter-spacing:.28em; text-transform:uppercase;
-  color:var(--gold); text-align:center; margin-bottom:10px;
+  font-size: .82rem; font-weight: 600;
+  letter-spacing: .28em; text-transform: uppercase;
+  color: var(--gold); text-align: center; margin-bottom: 10px;
 }
 .heading {
   font-size: clamp(1.6rem, 3vw, 2.2rem);
@@ -35,255 +35,24 @@
   letter-spacing: .04em;
 }
 
-/* ── Summary bar ── */
-.summary {
-  display: flex;
-  gap: 48px;
-  align-items: center;
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(185,137,65,.18);
-  border-radius: 12px;
-  padding: 32px 40px;
-  margin-bottom: 40px;
+/* Elfsight widget container */
+.widgetWrap {
   width: 100%;
-  box-sizing: border-box;
-}
-.summaryScore {
-  display: flex; flex-direction: column;
-  align-items: center; gap: 8px;
-  min-width: 120px;
-}
-.bigScore {
-  font-size: 3.4rem; font-weight: 300;
-  color: var(--cream); line-height: 1;
-}
-.totalReviews {
-  font-size: .82rem; color: rgba(250,242,231,.45);
-  letter-spacing: .08em;
-}
-.gPowered {
-  display: flex; align-items: center; gap: 6px;
-  margin-top: 6px;
-  font-size: .72rem; color: rgba(250,242,231,.35);
-  letter-spacing: .06em;
+  min-height: 300px;
 }
 
-.summaryBars { flex: 1; display: flex; flex-direction: column; gap: 8px; }
-.barRow { display: flex; align-items: center; gap: 10px; }
-.barLabel {
-  display: flex; align-items: center; gap: 3px;
-  font-size: .82rem; color: rgba(250,242,231,.55);
-  min-width: 34px;
-}
-.barTrack {
-  flex: 1; height: 6px; border-radius: 3px;
-  background: rgba(255,255,255,.08); overflow: hidden;
-}
-.barFill {
-  height: 100%; border-radius: 3px;
-  background: linear-gradient(90deg, var(--gold), #e6c87a);
-  transition: width .6s ease;
-}
-.barCount { font-size: .78rem; color: rgba(250,242,231,.4); min-width: 16px; text-align: right; }
+/* Override Elfsight default styles to match dark theme */
+.widgetWrap :global(.eapps-google-reviews-title) { display: none; }
 
-/* ── Stars ── */
-.stars { display: flex; gap: 2px; }
-.starBtn { background: none; border: none; cursor: pointer; padding: 2px; line-height: 0; }
-.starReadOnly { cursor: default; pointer-events: none; }
-.star { transition: color .15s, fill .15s; }
-.starFilled { color: #FBBC05; fill: #FBBC05; }
-.starEmpty  { color: rgba(255,255,255,.2); fill: rgba(255,255,255,.2); }
-
-/* ── Write review button ── */
-.writeWrap { display: flex; justify-content: center; margin-bottom: 48px; }
-.writeBtn {
-  display: flex; align-items: center; gap: 10px;
-  padding: 12px 28px; border-radius: 6px;
-  border: 1px solid rgba(185,137,65,.45);
-  background: transparent;
-  color: var(--cream); font-size: .92rem; letter-spacing: .06em;
-  cursor: pointer; transition: border-color .25s, background .25s;
-}
-.writeBtn:hover { border-color: var(--gold); background: rgba(185,137,65,.08); }
-
-/* ── Form ── */
-.formWrap {
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(185,137,65,.22);
-  border-radius: 12px;
-  padding: 32px 36px;
-  max-width: 560px;
-  width: 100%;
-  margin: 0 auto 48px;
-}
-.formHeader {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 22px;
-}
-.formTitle {
-  flex: 1; font-size: 1rem; font-weight: 600;
-  color: var(--cream); letter-spacing: .04em;
-}
-.closeForm {
-  background: none; border: none; cursor: pointer;
-  color: rgba(250,242,231,.4); font-size: 1rem;
-  line-height: 1; transition: color .2s;
-}
-.closeForm:hover { color: var(--cream); }
-
-.label {
-  display: block; font-size: .78rem; font-weight: 600;
-  letter-spacing: .14em; text-transform: uppercase;
-  color: rgba(250,242,231,.55); margin-bottom: 8px; margin-top: 18px;
-}
-.input, .textarea {
-  width: 100%; background: rgba(255,255,255,.06);
-  border: 1px solid rgba(185,137,65,.2);
-  border-radius: 6px; padding: 10px 14px;
-  color: var(--cream); font-size: .95rem;
-  font-family: inherit; resize: vertical;
-  transition: border-color .2s;
-  box-sizing: border-box;
-}
-.input:focus, .textarea:focus {
-  outline: none; border-color: rgba(185,137,65,.6);
-}
-.input::placeholder, .textarea::placeholder { color: rgba(250,242,231,.25); }
-.charCount {
-  display: block; text-align: right;
-  font-size: .72rem; color: rgba(250,242,231,.3);
-  margin-top: 4px;
-}
-
-.formError {
-  font-size: .84rem; color: #ff6b6b;
-  margin-top: 12px; letter-spacing: .03em;
-}
-
-.formActions {
-  display: flex; justify-content: flex-end; gap: 12px;
-  margin-top: 22px;
-}
-.cancelBtn {
-  padding: 9px 22px; border-radius: 5px;
-  border: 1px solid rgba(185,137,65,.25);
-  background: transparent; color: rgba(250,242,231,.55);
-  font-size: .9rem; cursor: pointer; transition: border-color .2s, color .2s;
-}
-.cancelBtn:hover { border-color: var(--gold); color: var(--cream); }
-.submitBtn {
-  padding: 9px 28px; border-radius: 5px;
-  border: none; background: var(--gold);
-  color: #fff; font-size: .9rem; font-weight: 600;
-  cursor: pointer; letter-spacing: .06em;
-  transition: opacity .2s;
-}
-.submitBtn:hover { opacity: .85; }
-
-.formSuccess {
-  display: flex; flex-direction: column;
-  align-items: center; gap: 10px;
-  padding: 24px 0; text-align: center;
-}
-.formSuccess p {
-  font-size: 1.1rem; color: var(--cream); font-weight: 600;
-}
-.formSuccess span {
-  font-size: .88rem; color: rgba(250,242,231,.5);
-}
-
-/* ── Review cards grid ── */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-}
-
-.card {
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(185,137,65,.15);
-  border-radius: 12px;
-  padding: 22px 24px;
-  display: flex; flex-direction: column; gap: 12px;
-  transition: border-color .25s, transform .25s;
-}
-.card:hover { border-color: rgba(185,137,65,.35); transform: translateY(-2px); }
-
-.cardTop { display: flex; align-items: center; gap: 12px; }
-.avatar {
-  width: 40px; height: 40px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: .82rem; font-weight: 700; color: #fff;
-  flex-shrink: 0; letter-spacing: .04em;
-}
-.avatarImg {
-  width: 40px; height: 40px; border-radius: 50%;
-  object-fit: cover; flex-shrink: 0;
-}
-.cardMeta { flex: 1; display: flex; flex-direction: column; gap: 2px; }
-.reviewer { font-size: .92rem; font-weight: 600; color: var(--cream); }
-.reviewDate { font-size: .76rem; color: rgba(250,242,231,.35); }
-.gBadge { display: flex; align-items: center; flex-shrink: 0; }
-
-.reviewText {
-  font-size: .9rem; line-height: 1.65;
-  color: rgba(250,242,231,.7);
-}
-.moreBtn {
-  display: inline-flex; align-items: center; gap: 3px;
-  background: none; border: none; cursor: pointer;
-  color: var(--gold); font-size: .82rem;
-  margin-left: 6px; padding: 0;
-}
-
-.cardFooter {
-  display: flex; align-items: center; gap: 10px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(185,137,65,.1);
-}
-.helpfulLabel { font-size: .78rem; color: rgba(250,242,231,.35); }
-.helpfulBtn {
-  display: flex; align-items: center; gap: 5px;
-  background: none; border: 1px solid rgba(185,137,65,.2);
-  border-radius: 20px; padding: 4px 12px;
-  color: rgba(250,242,231,.45); font-size: .78rem;
-  cursor: pointer; transition: border-color .2s, color .2s;
-}
-.helpfulBtn:hover:not(:disabled) { border-color: var(--gold); color: var(--gold); }
-.helpfulVoted { border-color: var(--gold) !important; color: var(--gold) !important; }
-.helpfulBtn:disabled { cursor: default; }
-
-/* ── Responsive ── */
-@media (max-width: 900px) {
-  .summary { flex-direction: column; gap: 28px; padding: 24px 28px; }
-  .summaryScore { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 10px; }
-  .summaryBars { width: 100%; }
-  .barTrack { flex: 1; min-width: 0; width: auto; }
-  .bigScore { font-size: 2.8rem; }
-}
 @media (max-width: 768px) {
   .section { padding: 64px 0 80px; }
   .inner { padding: 0 24px; }
   .heading { margin-bottom: 36px; }
-  .grid { grid-template-columns: 1fr; }
-  .formWrap { padding: 24px 20px; }
-  .summaryBars { width: 100%; }
-  .barRow { width: 100%; }
-  .barTrack { flex: 1; min-width: 60px; }
 }
 @media (max-width: 480px) {
   .section { padding: 48px 0 64px; }
   .inner { padding: 0 16px; }
-  .summary { padding: 20px 16px; }
-  .summaryBars { width: 100%; }
-  .barRow { width: 100%; gap: 8px; }
-  .barLabel { min-width: 28px; font-size: .76rem; }
-  .barTrack { flex: 1; min-width: 0; }
-  .barCount { min-width: 12px; }
-  .bigScore { font-size: 2.4rem; }
 }
 @media (max-width: 380px) {
   .inner { padding: 0 14px; }
-  .summaryBars { width: 100%; }
-  .barTrack { flex: 1; min-width: 0; }
 }
