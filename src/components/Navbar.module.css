@@ -53,7 +53,7 @@
 }
 
 .brandText {
-  height: 32px;
+  height: 56px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -202,7 +202,7 @@
   }
 
   .logoImg { height: 72px; }
-  .brandText { height: 30px; }
+  .brandText { height: 52px; }
 
   .logoA {
     font-size: 1.15rem;
@@ -217,7 +217,7 @@
 @media (max-width: 640px) {
   .bar { height: 76px; padding: 0 16px; }
   .logoImg { height: 68px; }
-  .brandText { height: 28px; }
+  .brandText { height: 46px; }
   .logoA { font-size: 1.08rem; letter-spacing: .24em; }
   .logoB { font-size: .58rem; letter-spacing: .36em; }
 }
@@ -225,7 +225,7 @@
 @media (max-width: 480px) {
   .bar { height: 72px; padding: 0 14px; }
   .logoImg { height: 64px; }
-  .brandText { height: 26px; }
+  .brandText { height: 42px; }
   .logoText { display: flex; }
   .logoA { font-size: 1rem; letter-spacing: .2em; }
   .logoB { font-size: .54rem; letter-spacing: .32em; }
@@ -234,7 +234,7 @@
 @media (max-width: 380px) {
   .bar { height: 68px; padding: 0 12px; }
   .logoImg { height: 58px; }
-  .brandText { height: 24px; }
+  .brandText { height: 38px; }
   .logoText { display: flex; }
   .logoA { font-size: .92rem; letter-spacing: .16em; }
   .logoB { font-size: .5rem; letter-spacing: .26em; }
