@@ -53,9 +53,9 @@
 }
 
 .brandText {
-  height: 72px;
-  max-width: 220px;
-  width: auto;
+  height: auto;
+  width: 280px;
+  max-width: 280px;
   object-fit: contain;
   display: block;
   flex-shrink: 0;
@@ -202,7 +202,7 @@
   }
 
   .logoImg { height: 72px; }
-  .brandText { height: 66px; max-width: 200px; }
+  .brandText { width: 240px; height: auto; max-width: 240px; }
 
   .logoA {
     font-size: 1.15rem;
@@ -217,7 +217,7 @@
 @media (max-width: 640px) {
   .bar { height: 76px; padding: 0 16px; }
   .logoImg { height: 68px; }
-  .brandText { height: 60px; max-width: 180px; }
+  .brandText { width: 200px; height: auto; max-width: 200px; }
   .logoA { font-size: 1.08rem; letter-spacing: .24em; }
   .logoB { font-size: .58rem; letter-spacing: .36em; }
 }
@@ -225,7 +225,7 @@
 @media (max-width: 480px) {
   .bar { height: 72px; padding: 0 14px; }
   .logoImg { height: 64px; }
-  .brandText { height: 54px; max-width: 160px; }
+  .brandText { width: 160px; height: auto; max-width: 160px; }
   .logoText { display: flex; }
   .logoA { font-size: 1rem; letter-spacing: .2em; }
   .logoB { font-size: .54rem; letter-spacing: .32em; }
@@ -234,7 +234,7 @@
 @media (max-width: 380px) {
   .bar { height: 68px; padding: 0 12px; }
   .logoImg { height: 58px; }
-  .brandText { height: 48px; max-width: 140px; }
+  .brandText { width: 130px; height: auto; max-width: 130px; }
   .logoText { display: flex; }
   .logoA { font-size: .92rem; letter-spacing: .16em; }
   .logoB { font-size: .5rem; letter-spacing: .26em; }
