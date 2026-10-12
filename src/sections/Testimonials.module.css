@@ -216,6 +216,10 @@
   font-size: .82rem; font-weight: 700; color: #fff;
   flex-shrink: 0; letter-spacing: .04em;
 }
+.avatarImg {
+  width: 40px; height: 40px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+}
 .cardMeta { flex: 1; display: flex; flex-direction: column; gap: 2px; }
 .reviewer { font-size: .92rem; font-weight: 600; color: var(--cream); }
 .reviewDate { font-size: .76rem; color: rgba(250,242,231,.35); }

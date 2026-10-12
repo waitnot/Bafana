@@ -86,3 +86,8 @@ export async function deleteReview(id) {
     body: JSON.stringify({ id }),
   })
 }
+
+export async function getGoogleReviews() {
+  const res = await fetch('/api/google-reviews')
+  return res.json()
+}

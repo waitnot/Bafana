@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Star, ThumbsUp, ChevronDown, ChevronUp } from 'lucide-react'
 import s from './Testimonials.module.css'
 import { saveReview } from '../hooks/useAdminStore'
-import { postReview } from '../hooks/useApi'
+import { postReview, getGoogleReviews } from '../hooks/useApi'
 
 const GOOGLE_LOGO = (
   <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
@@ -94,9 +94,10 @@ function ReviewCard({ review }) {
   return (
     <div className={s.card}>
       <div className={s.cardTop}>
-        <div className={s.avatar} style={{ background: review.color }}>
-          {review.initials}
-        </div>
+        {review.avatar
+          ? <img src={review.avatar} alt={review.name} className={s.avatarImg} />
+          : <div className={s.avatar} style={{ background: review.color }}>{review.initials}</div>
+        }
         <div className={s.cardMeta}>
           <span className={s.reviewer}>{review.name}</span>
           <span className={s.reviewDate}>{review.date}</span>
@@ -224,8 +225,42 @@ function WriteReviewForm({ onSubmit }) {
 
 export default function Testimonials() {
   const [reviews, setReviews] = useState(INITIAL_REVIEWS)
+  const [googleAvg, setGoogleAvg] = useState(null)
+  const [googleTotal, setGoogleTotal] = useState(null)
 
-  const avg = (reviews.reduce((a, r) => a + r.rating, 0) / reviews.length).toFixed(1)
+  // Fetch real Google reviews on mount
+  useEffect(() => {
+    getGoogleReviews()
+      .then(data => {
+        if (data?.reviews?.length) {
+          const colors = ['#4285F4', '#34A853', '#EA4335', '#FBBC05', '#9C27B0', '#FF5722']
+          const googleFormatted = data.reviews.map((r, i) => ({
+            id:       `g_${r.id}`,
+            name:     r.name,
+            initials: r.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2),
+            color:    r.profilePhoto ? null : colors[i % colors.length],
+            avatar:   r.profilePhoto || null,
+            rating:   r.rating,
+            date:     new Date(r.date).toLocaleString('en-US', { month: 'long', year: 'numeric' }),
+            text:     r.text,
+            helpful:  0,
+            isGoogle: true,
+          }))
+          // Google reviews first, then local fallbacks
+          setReviews(googleFormatted)
+        }
+        if (data?.summary) {
+          setGoogleAvg(parseFloat(data.summary.averageRating).toFixed(1))
+          setGoogleTotal(data.summary.totalReviews)
+        }
+      })
+      .catch(() => {
+        // API unavailable — keep initial reviews as fallback
+      })
+  }, [])
+
+  const avg = googleAvg || (reviews.reduce((a, r) => a + r.rating, 0) / reviews.length).toFixed(1)
+  const totalCount = googleTotal || reviews.length
   const dist = [5, 4, 3, 2, 1].map(n => ({
     n,
     count: reviews.filter(r => r.rating === n).length,
@@ -255,7 +290,7 @@ export default function Testimonials() {
           <div className={s.summaryScore}>
             <span className={s.bigScore}>{avg}</span>
             <StarRating value={Math.round(avg)} readOnly />
-            <span className={s.totalReviews}>{reviews.length} reviews</span>
+            <span className={s.totalReviews}>{totalCount} reviews on Google</span>
             <div className={s.gPowered}>
               {GOOGLE_LOGO}
               <span>Powered by Google</span>
