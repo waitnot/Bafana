@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import logoImg from '../assets/bp-logo.png'
+import brandText from '../assets/brand-text.png'
 import s from './Navbar.module.css'
 
 const links = [
@@ -38,10 +39,7 @@ export default function Navbar({ onBook }) {
         {/* Logo */}
         <Link to="/" className={s.logo}>
           <img src={logoImg} alt="Bafana Pyramids" className={s.logoImg} />
-          <div className={s.logoText}>
-            <span className={s.logoA}>BAFANA</span>
-            <span className={s.logoB}>PYRAMIDS</span>
-          </div>
+          <img src={brandText} alt="Bafana Pyramids" className={s.brandText} />
         </Link>
 
         {/* Right nav */}
