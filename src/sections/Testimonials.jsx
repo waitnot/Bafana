@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Star, ThumbsUp, ChevronDown, ChevronUp } from 'lucide-react'
 import s from './Testimonials.module.css'
 import { saveReview } from '../hooks/useAdminStore'
+import { postReview } from '../hooks/useApi'
 
 const GOOGLE_LOGO = (
   <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
@@ -145,7 +146,7 @@ function WriteReviewForm({ onSubmit }) {
   const [error, setError] = useState('')
   const [done, setDone] = useState(false)
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     if (!rating) return setError('Please select a star rating.')
     if (!name.trim()) return setError('Please enter your name.')
@@ -153,6 +154,7 @@ function WriteReviewForm({ onSubmit }) {
     setError('')
     onSubmit({ name: name.trim(), rating, text: text.trim() })
     saveReview({ name: name.trim(), rating, text: text.trim() })
+    try { await postReview({ name: name.trim(), rating, text: text.trim() }) } catch (e) { console.warn('API save failed:', e) }
     setDone(true)
     setTimeout(() => { setDone(false); setOpen(false); setRating(0); setName(''); setText('') }, 3000)
   }

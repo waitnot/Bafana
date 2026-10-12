@@ -3,6 +3,7 @@ import { MapPin, Phone, Mail, Clock } from 'lucide-react'
 import s from './Contact.module.css'
 import Calendar from '../components/Calendar'
 import { saveConsultation } from '../hooks/useAdminStore'
+import { postConsultation } from '../hooks/useApi'
 
 export default function Contact() {
   const [form, setForm] = useState({ name:'', email:'', phone:'', project:'', message:'', visitDate:'' })
@@ -42,7 +43,12 @@ export default function Contact() {
                 <p className={s.successBody}>Our team will be in touch within 24 hours.</p>
               </div>
             ) : (
-              <form className={s.form} onSubmit={e => { e.preventDefault(); saveConsultation({ ...form }); setSent(true) }}>
+              <form className={s.form} onSubmit={async e => {
+                e.preventDefault()
+                saveConsultation({ ...form })
+                try { await postConsultation({ ...form }) } catch (err) { console.warn('API save failed:', err) }
+                setSent(true)
+              }}>
                 <div className={s.row2}>
                   <label className={s.field}>
                     <span className={s.lbl}>Full Name *</span>

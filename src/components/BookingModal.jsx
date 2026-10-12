@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { X, Calendar, Users, BedDouble, ChevronRight, Check, Phone, Mail, MapPin } from 'lucide-react'
 import s from './BookingModal.module.css'
 import { saveBooking } from '../hooks/useAdminStore'
+import { postBooking } from '../hooks/useApi'
 
 const roomTypes = [
   { id: 'sq',  label: 'Standard Queen',        sub: 'Queen Bed · Classic Comfort' },
@@ -75,8 +76,8 @@ export default function BookingModal({ onClose, initialRoom = null, initialCheck
 
   const next = () => { if (validate()) setStep(s => s + 1) }
   const back = () => setStep(s => s - 1)
-  const submit = () => {
-    saveBooking({
+  const submit = async () => {
+    const payload = {
       name: form.name,
       email: form.email,
       phone: form.phone,
@@ -85,7 +86,10 @@ export default function BookingModal({ onClose, initialRoom = null, initialCheck
       guests: form.guests,
       room: selectedRoom?.label || form.room,
       message: form.message,
-    })
+    }
+    // Save to both localStorage (offline fallback) and Neon DB
+    saveBooking(payload)
+    try { await postBooking(payload) } catch (e) { console.warn('API save failed:', e) }
     setDone(true)
   }
 

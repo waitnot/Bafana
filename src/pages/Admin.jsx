@@ -1,41 +1,46 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import {
+  getBookings as getBookingsLocal,
+  getConsultations as getConsultationsLocal,
+  getReviews as getReviewsLocal,
+} from '../hooks/useAdminStore'
+import {
   getBookings, getConsultations, getReviews,
   updateBookingStatus, updateConsultationStatus,
   deleteBooking, deleteConsultation, deleteReview,
-} from '../hooks/useAdminStore'
+} from '../hooks/useApi'
 import logoImg from '../assets/bp-logo.png'
 
 const PASS = 'bafana2026'
 
-/* ── Real-time sync: listens to localStorage changes from any tab/window
-      and also polls every 3s so same-tab writes are caught immediately ── */
-function useRealtimeData(getFn, key) {
-  const [data, setData] = useState(() => getFn())
-  const prev = useRef(JSON.stringify(getFn()))
+/* ── Real-time hook: fetches from API every 5s ── */
+function useRealtimeData(apiFn, localFn) {
+  const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  const refresh = useCallback(() => {
-    const fresh = getFn()
-    const freshStr = JSON.stringify(fresh)
-    if (freshStr !== prev.current) {
-      prev.current = freshStr
-      setData(fresh)
+  const refresh = useCallback(async () => {
+    try {
+      const rows = await apiFn()
+      // Merge with localStorage so offline submissions also appear
+      const local = localFn ? localFn() : []
+      const apiIds = new Set(rows.map(r => String(r.id)))
+      const localOnly = local.filter(r => !apiIds.has(String(r.id)))
+      setData([...rows, ...localOnly])
+    } catch (e) {
+      // API failed — fall back to localStorage only
+      if (localFn) setData(localFn())
+    } finally {
+      setLoading(false)
     }
-  }, [getFn])
+  }, [apiFn, localFn])
 
   useEffect(() => {
-    // Poll every 2 seconds to catch same-tab writes
-    const interval = setInterval(refresh, 2000)
-    // Also listen for cross-tab storage events
-    const onStorage = (e) => { if (!key || e.key === key) refresh() }
-    window.addEventListener('storage', onStorage)
-    return () => {
-      clearInterval(interval)
-      window.removeEventListener('storage', onStorage)
-    }
-  }, [refresh, key])
+    refresh()
+    const interval = setInterval(refresh, 5000)
+    return () => clearInterval(interval)
+  }, [refresh])
 
-  return [data, refresh]
+  return [data, loading, refresh]
 }
 
 function fmt(iso) {
@@ -72,6 +77,21 @@ function Badge({ status }) {
   )
 }
 
+function LoadingState() {
+  return (
+    <div style={{ textAlign: 'center', padding: '60px 20px', color: '#9CA3AF' }}>
+      <div style={{
+        width: 32, height: 32, border: '3px solid #E5E7EB',
+        borderTopColor: '#111827', borderRadius: '50%',
+        margin: '0 auto 14px',
+        animation: 'spin 0.8s linear infinite',
+      }}/>
+      <style>{`@keyframes spin { to { transform: rotate(360deg) } }`}</style>
+      <p style={{ fontSize: 14 }}>Loading...</p>
+    </div>
+  )
+}
+
 function EmptyState({ label }) {
   return (
     <div style={{ textAlign: 'center', padding: '60px 20px', color: '#9CA3AF' }}>
@@ -89,15 +109,20 @@ function EmptyState({ label }) {
 
 /* ── Bookings Tab ── */
 function BookingsTab() {
-  const [items, refresh] = useRealtimeData(getBookings, 'bp_bookings')
+  const [items, loading, refresh] = useRealtimeData(getBookings, getBookingsLocal)
   const [expanded, setExpanded] = useState(null)
 
-  const setStatus = (id, status) => { updateBookingStatus(id, status); refresh() }
-  const remove = (id) => {
+  const setStatus = async (id, status) => {
+    await updateBookingStatus(id, status)
+    refresh()
+  }
+  const remove = async (id) => {
     if (!confirm('Delete this booking?')) return
-    deleteBooking(id); refresh()
+    await deleteBooking(id)
+    refresh()
   }
 
+  if (loading) return <LoadingState />
   if (!items.length) return <EmptyState label="bookings" />
 
   return (
@@ -129,8 +154,8 @@ function BookingsTab() {
                 <p style={{ fontSize: 12, color: '#6B7280', marginTop: 2 }}>{b.guests} guest{b.guests !== '1' ? 's' : ''}</p>
               </div>
               <div>
-                <p style={{ fontSize: 12, color: '#6B7280' }}>{fmtDate(b.checkIn)} → {fmtDate(b.checkOut)}</p>
-                <p style={{ fontSize: 11, color: '#9CA3AF', marginTop: 2 }}>{fmt(b.submittedAt)}</p>
+                <p style={{ fontSize: 12, color: '#6B7280' }}>{fmtDate(b.check_in || b.checkIn)} → {fmtDate(b.check_out || b.checkOut)}</p>
+                <p style={{ fontSize: 11, color: '#9CA3AF', marginTop: 2 }}>{fmt(b.submitted_at || b.submittedAt)}</p>
               </div>
               <Badge status={b.status} />
               <span style={{ fontSize: 18, color: '#9CA3AF', userSelect: 'none' }}>
@@ -145,10 +170,10 @@ function BookingsTab() {
                   {[
                     ['Phone', b.phone],
                     ['Guests', b.guests],
-                    ['Check-in', fmtDate(b.checkIn)],
-                    ['Check-out', fmtDate(b.checkOut)],
+                    ['Check-in', fmtDate(b.check_in || b.checkIn)],
+                    ['Check-out', fmtDate(b.check_out || b.checkOut)],
                     ['Room', b.room],
-                    ['Submitted', fmt(b.submittedAt)],
+                    ['Submitted', fmt(b.submitted_at || b.submittedAt)],
                   ].map(([k, v]) => (
                     <div key={k}>
                       <p style={{ fontSize: 11, fontWeight: 700, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '.06em' }}>{k}</p>
@@ -189,12 +214,16 @@ function BookingsTab() {
 
 /* ── Consultations Tab ── */
 function ConsultationsTab() {
-  const [items, refresh] = useRealtimeData(getConsultations, 'bp_consultations')
+  const [items, loading, refresh] = useRealtimeData(getConsultations, getConsultationsLocal)
   const [expanded, setExpanded] = useState(null)
 
-  const setStatus = (id, status) => { updateConsultationStatus(id, status); refresh() }
-  const remove = (id) => { if (!confirm('Delete this consultation?')) return; deleteConsultation(id); refresh() }
+  const setStatus = async (id, status) => { await updateConsultationStatus(id, status); refresh() }
+  const remove = async (id) => {
+    if (!confirm('Delete this consultation?')) return
+    await deleteConsultation(id); refresh()
+  }
 
+  if (loading) return <LoadingState />
   if (!items.length) return <EmptyState label="consultations" />
 
   return (
@@ -221,8 +250,8 @@ function ConsultationsTab() {
                 <p style={{ fontSize: 12, color: '#6B7280', marginTop: 2 }}>{b.phone}</p>
               </div>
               <div>
-                <p style={{ fontSize: 12, color: '#6B7280' }}>Visit: {fmtDate(b.visitDate)}</p>
-                <p style={{ fontSize: 11, color: '#9CA3AF', marginTop: 2 }}>{fmt(b.submittedAt)}</p>
+                <p style={{ fontSize: 12, color: '#6B7280' }}>Visit: {fmtDate(b.visit_date || b.visitDate)}</p>
+                <p style={{ fontSize: 11, color: '#9CA3AF', marginTop: 2 }}>{fmt(b.submitted_at || b.submittedAt)}</p>
               </div>
               <Badge status={b.status} />
               <span style={{ fontSize: 18, color: '#9CA3AF', userSelect: 'none' }}>
@@ -236,8 +265,8 @@ function ConsultationsTab() {
                   {[
                     ['Phone', b.phone],
                     ['Room Type', b.project],
-                    ['Visit Date', fmtDate(b.visitDate)],
-                    ['Submitted', fmt(b.submittedAt)],
+                    ['Visit Date', fmtDate(b.visit_date || b.visitDate)],
+                    ['Submitted', fmt(b.submitted_at || b.submittedAt)],
                   ].map(([k, v]) => (
                     <div key={k}>
                       <p style={{ fontSize: 11, fontWeight: 700, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '.06em' }}>{k}</p>
@@ -278,9 +307,13 @@ function ConsultationsTab() {
 
 /* ── Reviews Tab ── */
 function ReviewsTab() {
-  const [items, refresh] = useRealtimeData(getReviews, 'bp_reviews')
-  const remove = (id) => { if (!confirm('Delete this review?')) return; deleteReview(id); refresh() }
+  const [items, loading, refresh] = useRealtimeData(getReviews, getReviewsLocal)
+  const remove = async (id) => {
+    if (!confirm('Delete this review?')) return
+    await deleteReview(id); refresh()
+  }
 
+  if (loading) return <LoadingState />
   if (!items.length) return <EmptyState label="reviews" />
 
   return (
@@ -313,7 +346,7 @@ function ReviewsTab() {
                   </div>
                 </div>
                 <p style={{ fontSize: 13, color: '#374151', lineHeight: 1.65 }}>{r.text}</p>
-                <p style={{ fontSize: 11, color: '#9CA3AF', marginTop: 8 }}>Submitted: {fmt(r.submittedAt)}</p>
+                <p style={{ fontSize: 11, color: '#9CA3AF', marginTop: 8 }}>Submitted: {fmt(r.submitted_at || r.submittedAt)}</p>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'flex-end' }}>
                 <Badge status={r.status || 'Published'} />
@@ -338,9 +371,9 @@ export default function Admin() {
   const [err, setErr] = useState('')
   const [tab, setTab] = useState('bookings')
 
-  const [bookings]      = useRealtimeData(getBookings,      'bp_bookings')
-  const [consultations] = useRealtimeData(getConsultations, 'bp_consultations')
-  const [reviews]       = useRealtimeData(getReviews,       'bp_reviews')
+  const [bookings]      = useRealtimeData(getBookings,      getBookingsLocal)
+  const [consultations] = useRealtimeData(getConsultations, getConsultationsLocal)
+  const [reviews]       = useRealtimeData(getReviews,       getReviewsLocal)
 
   const counts = {
     bookings:      bookings.length,
