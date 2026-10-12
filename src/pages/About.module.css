@@ -1,0 +1,112 @@
+/* hero */
+.hero { background:var(--navy); padding:160px 48px 100px; text-align:center; }
+.heroInner { max-width:680px; margin:0 auto; }
+
+.orn { display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:22px; }
+.oLine { width:44px; height:1px; background:rgba(185,137,65,.45); }
+.oDot  { width:5px; height:5px; background:var(--gold); transform:rotate(45deg); flex-shrink:0; }
+
+.breadcrumb { font-size:.78rem; letter-spacing:.22em; text-transform:uppercase; color:rgba(185,137,65,.45); margin-bottom:18px; }
+.heroTitle  { font-size:clamp(2.8rem,6vw,4.8rem); color:#fff; font-weight:300; line-height:1.1; }
+.heroTitle em { font-style:italic; color:var(--beige); }
+.heroRule   { width:48px; height:1px; background:var(--gold); opacity:.55; margin:22px auto; }
+.heroSub    { font-size:1.05rem; color:rgba(250,242,231,.55); line-height:1.8; max-width:480px; margin:0 auto; }
+
+/* intro */
+.intro { background:#FAF2E7; padding:120px 0; }
+.introGrid { max-width:1320px; margin:0 auto; padding:0 48px; display:grid; grid-template-columns:1fr 1fr; gap:96px; align-items:center; }
+
+.introText {}
+.eyebrow { font-size:.82rem; font-weight:600; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+.secTitle { font-size:clamp(2.2rem,3vw,3rem); color:var(--navy); line-height:1.15; }
+.secTitle em { font-style:italic; color:var(--teal); }
+.ruleShort { width:40px; height:1px; background:var(--gold); opacity:.6; margin:20px 0 28px; }
+.body { font-size:1rem; line-height:1.9; color:var(--brown); margin-bottom:18px; max-width:400px; }
+
+.certBadge { display:inline-flex; align-items:center; gap:14px; border:1px solid rgba(185,137,65,.35); padding:12px 20px; margin-top:8px; }
+.certN { font-family:'Times New Roman',Times,serif; font-size:1.2rem; font-weight:600; color:var(--gold); }
+.certT { font-size:.82rem; letter-spacing:.12em; text-transform:uppercase; color:var(--brown); opacity:.7; }
+
+.introImgWrap { position:relative; }
+.introImg {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 2px;
+  border: 1px solid rgba(185,137,65,.2);
+}
+.introBadge { position:absolute; bottom:-20px; right:-20px; background:var(--gold); padding:20px 24px; display:flex; flex-direction:column; align-items:center; }
+.introBadgeN { font-family:'Times New Roman',Times,serif; font-size:2rem; font-weight:600; color:var(--navy); line-height:1; }
+.introBadgeT { font-size:.78rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:rgba(26,41,64,.65); margin-top:4px; }
+
+/* timeline */
+.timeline { background:var(--cream); padding:120px 0; border-top:1px solid var(--beige); border-bottom:1px solid var(--beige); }
+.container { max-width:1320px; margin:0 auto; padding:0 48px; }
+
+.timeHead { text-align:center; margin-bottom:72px; }
+
+.timeList { max-width:680px; margin:0 auto; display:flex; flex-direction:column; }
+
+.timeItem {
+  display:grid; grid-template-columns:90px 28px 1fr;
+  align-items:center; gap:24px; padding:24px 0;
+  border-bottom:1px solid rgba(77,51,35,.1);
+}
+.timeItem:last-child { border-bottom:none; }
+
+.timeYear { font-family:'Times New Roman',Times,serif; font-size:1.4rem; font-weight:500; color:var(--gold); text-align:right; }
+.timeDot  { width:9px; height:9px; border-radius:50%; background:var(--navy); border:2px solid var(--gold); justify-self:center; }
+.timeEvent { font-size:1rem; line-height:1.7; color:var(--brown); }
+
+/* team */
+.teamSec { background:#FAF2E7; padding:120px 0; }
+.teamGrid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:var(--beige); margin-top:0; }
+.teamCard { background:#FAF2E7; padding:48px 28px; text-align:center; transition:background .3s; }
+.teamCard:hover { background:var(--cream); }
+
+.teamAvatar { width:72px; height:72px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-family:'Times New Roman',Times,serif; font-size:1.8rem; font-weight:600; color:#fff; }
+.teamName { font-size:1.2rem; color:var(--navy); margin-bottom:6px; }
+.teamRole { font-size:.85rem; color:var(--brown); opacity:.6; letter-spacing:.08em; }
+
+@media (max-width:960px) {
+  .introGrid { grid-template-columns:1fr; gap:48px; padding:0 24px; }
+  .teamGrid { grid-template-columns:1fr 1fr; }
+  .container { padding:0 24px; }
+  .hero { padding:130px 24px 72px; }
+  .introImgWrap { overflow: visible; }
+  .introBadge { right: 0; bottom: -16px; }
+  .body { max-width:100%; }
+  /* reduce portrait image height in single-column */
+  .introImg { aspect-ratio: 16/9; }
+}
+@media (max-width:768px) {
+  .hero { padding:120px 20px 64px; }
+  .intro { padding: 64px 0; }
+  .introImg { aspect-ratio: 16/9; }
+  .introBadge { padding: 14px 18px; }
+  .introBadgeN { font-size: 1.6rem; }
+}
+@media (max-width:560px) {
+  .teamGrid { grid-template-columns:1fr; }
+  .timeItem { grid-template-columns:60px 16px 1fr; gap:12px; }
+  .intro { padding:56px 0; }
+  .timeline { padding:56px 0; }
+  .teamSec { padding:56px 0; }
+  .teamCard { padding:28px 18px; }
+  .introBadge { display:none; }
+}
+@media (max-width:480px) {
+  .hero { padding:110px 16px 56px; }
+  .heroTitle { font-size:clamp(1.8rem,7vw,2.8rem); }
+  .certBadge { flex-direction:column; text-align:center; padding:16px; }
+  .secTitle { font-size:clamp(1.6rem,5vw,2.2rem); }
+  .teamCard { padding:22px 14px; }
+}
+@media (max-width:380px) {
+  .hero { padding:100px 14px 48px; }
+  .container { padding:0 14px; }
+  .introGrid { padding:0 14px; }
+  .teamCard { padding:18px 12px; }
+}

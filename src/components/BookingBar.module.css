@@ -1,0 +1,323 @@
+/* ══════════════════════════════════
+   BookingBar
+   ══════════════════════════════════ */
+
+/* ── Desktop: absolute floating bar inside hero ── */
+.wrap {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  width: calc(100% - 96px);
+  max-width: 960px;
+  animation: slideUp .8s .4s cubic-bezier(.4,0,.2,1) both;
+}
+
+@keyframes slideUp {
+  from { opacity:0; transform:translateX(-50%) translateY(22px); }
+  to   { opacity:1; transform:translateX(-50%) translateY(0); }
+}
+
+/* ── bar ── */
+.bar {
+  background: #FAF2E7;
+  border-radius: 60px;
+  padding: 0 10px 0 8px;
+  display: flex;
+  align-items: center;
+  height: 66px;
+  box-shadow: 0 16px 56px rgba(26,41,64,.24), 0 2px 8px rgba(26,41,64,.08);
+  border: 1px solid rgba(221,198,157,.4);
+}
+
+/* ── field ── */
+.field {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 20px;
+  cursor: pointer;
+  position: relative;
+  height: 100%;
+  border-radius: 60px;
+  transition: background .2s;
+  min-width: 0;
+  user-select: none;
+}
+.field:hover { background: rgba(250,242,231,.6); }
+.fieldActive  { background: rgba(250,242,231,.8) !important; }
+.fieldDate { flex: 1.5; }
+.icon { color: var(--gold); flex-shrink: 0; }
+
+.fieldBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.fieldLbl {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--brown); opacity: .4;
+  white-space: nowrap;
+}
+.fieldVal {
+  font-size: 13px; font-weight: 600;
+  color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.fieldPlaceholder {
+  font-size: 13px; color: rgba(77,51,35,.3); white-space: nowrap;
+}
+
+/* code input */
+.codeInput {
+  border: none; outline: none; background: transparent;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 13px; font-weight: 500;
+  color: var(--navy); width: 100%;
+}
+.codeInput::placeholder { color: rgba(77,51,35,.3); }
+
+/* divider */
+.divider {
+  width: 1px; height: 28px;
+  background: rgba(77,51,35,.12);
+  flex-shrink: 0;
+}
+
+/* ── Guests Modal ── */
+.guestModalBox {
+  background: #FAF2E7;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 420px;
+  overflow: hidden;
+  animation: calSlideUp .25s cubic-bezier(.4,0,.2,1) both;
+  box-shadow: 0 24px 64px rgba(10,16,26,.3);
+}
+
+.guestModalHeader {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  padding: 24px 24px 16px;
+  background: var(--navy);
+}
+.guestModalEyebrow {
+  font-size: .72rem; font-weight: 700; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 4px;
+}
+.guestModalTitle {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.4rem; font-weight: 300; color: #fff;
+}
+.guestModalClose {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.25);
+  color: rgba(255,255,255,.7);
+  background: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color .2s, color .2s; flex-shrink: 0;
+}
+.guestModalClose:hover { border-color: var(--gold); color: var(--gold); }
+
+.guestOptions {
+  display: flex; flex-direction: column; gap: 0;
+  padding: 12px;
+}
+.guestOption {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px;
+  border: 1.5px solid transparent;
+  border-radius: 6px;
+  background: none; cursor: pointer;
+  text-align: left;
+  transition: border-color .2s, background .2s, transform .15s;
+}
+.guestOption:hover { border-color: rgba(185,137,65,.3); background: rgba(185,137,65,.05); transform: translateX(3px); }
+.guestOptionOn { border-color: var(--gold) !important; background: rgba(185,137,65,.08) !important; transform: translateX(3px); }
+
+.guestOptionLeft {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(185,137,65,.1);
+  border: 1px solid rgba(185,137,65,.25);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; color: var(--gold);
+}
+.guestOptionBody { flex: 1; }
+.guestOptionLabel { display: block; font-size: .98rem; font-weight: 600; color: var(--navy); }
+.guestOptionSub   { display: block; font-size: .78rem; color: var(--brown); opacity: .55; margin-top: 1px; }
+.guestOptionCheck {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--gold); color: #fff; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ── Book Now button ── */
+.bookBtn {
+  flex-shrink: 0;
+  background: var(--gold); color: var(--navy);
+  font-size: 11px; font-weight: 800; letter-spacing: .22em;
+  padding: 0 28px; height: 50px; border-radius: 40px; border: none;
+  cursor: pointer; white-space: nowrap; margin-left: 8px;
+  box-shadow: 0 4px 18px rgba(185,137,65,.4);
+  transition: background .25s, transform .2s, box-shadow .2s;
+  font-family: inherit;
+}
+.bookBtn:hover {
+  background: var(--brown); color: var(--cream);
+  transform: translateY(-2px);
+}
+
+/* ── Modify button ── */
+.modifyBtn {
+  flex-shrink: 0;
+  display: flex; align-items: center; gap: 5px;
+  background: none; border: none; cursor: pointer;
+  padding: 0 14px 0 10px;
+  color: var(--navy); opacity: .45; transition: opacity .2s;
+}
+.modifyBtn:hover { opacity: .85; }
+.modifyBtn span {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  line-height: 1.4; text-align: left;
+}
+
+/* ══════════════════════════════════
+   Tablet (900px) — still absolute
+   ══════════════════════════════════ */
+@media (max-width: 900px) {
+  .wrap {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    animation: slideUp .8s .4s cubic-bezier(.4,0,.2,1) both;
+  }
+  .bar { height: auto; padding: 14px 16px; border-radius: 16px; flex-wrap: wrap; gap: 8px; }
+  .divider { display: none; }
+  .field { flex: 1 1 calc(50% - 8px); height: 52px; padding: 0 12px; border-radius: 8px; }
+  .bookBtn { flex: 1 1 100%; height: 44px; border-radius: 8px; margin-left: 0; }
+  .modifyBtn { display: none; }
+  .calPopover { left: 50%; transform: translateX(-50%); }
+}
+
+/* ── Calendar Modal (portal) ── */
+.calModalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(10,16,26,.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: calFadeIn .2s ease both;
+}
+@keyframes calFadeIn { from{opacity:0} to{opacity:1} }
+
+.calModalBox {
+  position: relative;
+  animation: calSlideUp .25s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes calSlideUp {
+  from { opacity:0; transform:translateY(20px) }
+  to   { opacity:1; transform:translateY(0) }
+}
+
+.calModalClose {
+  position: absolute;
+  top: -14px; right: -14px;
+  z-index: 10;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--navy); color: #fff;
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+  transition: background .2s;
+}
+.calModalClose:hover { background: var(--gold); }
+
+/* ── Calendar backdrop on mobile (legacy, kept for safety) ── */
+.calBackdrop { display: none; }
+
+/* ══════════════════════════════════
+   Mobile (≤768px) — in normal flow
+   ══════════════════════════════════ */
+@media (max-width: 768px) {
+  .calBackdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    z-index: 999;
+  }
+  .wrap {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+    animation: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 8px 12px 12px;
+    background: rgba(10,16,30,.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .bar {
+    border-radius: 12px;
+    height: auto;
+    padding: 8px 8px 8px;
+    flex-wrap: wrap;
+    gap: 6px;
+    box-shadow: none;
+    background: rgba(250,242,231,.95);
+    border: 1px solid rgba(185,137,65,.2);
+  }
+  .divider { display: none; }
+  .fieldCode { display: none; }
+  .modifyBtn { display: none; }
+  .field {
+    flex: 1 1 calc(50% - 6px);
+    height: 50px;
+    padding: 0 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(185,137,65,.15);
+    background: #fff;
+    min-width: 0;
+  }
+  .fieldDate {
+    flex: 1 1 100%;
+  }
+  .bookBtn {
+    flex: 1 1 100%;
+    height: 44px;
+    border-radius: 8px;
+    margin-left: 0;
+    margin-top: 4px;
+    font-size: 11px;
+    letter-spacing: .2em;
+  }
+  /* guest popover no longer used — now a modal */
+}
+
+@media (max-width: 480px) {
+  .wrap { padding: 6px 10px 10px; }
+  .field { height: 46px; padding: 0 8px; }
+  .fieldLbl { font-size: 9px; }
+  .fieldVal, .fieldPlaceholder { font-size: 12px; }
+  .bookBtn { height: 42px; font-size: 10px; }
+}
+
+@media (max-width: 380px) {
+  .wrap { padding: 5px 8px 8px; }
+  .field { height: 42px; }
+  .fieldLbl { font-size: 8px; }
+  .fieldVal, .fieldPlaceholder { font-size: 11px; }
+  .bookBtn { height: 38px; }
+}

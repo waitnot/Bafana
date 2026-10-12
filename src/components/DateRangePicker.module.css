@@ -1,0 +1,267 @@
+/* ── Card ── */
+.card {
+  background: #FAF2E7;
+  border-radius: 18px;
+  border: 1px solid rgba(185,137,65,.35);
+  box-shadow: 0 16px 56px rgba(26,41,64,.14);
+  padding: 0;
+  width: 520px;
+  max-width: calc(100vw - 24px);
+  font-family: 'Times New Roman', Times, serif;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+}
+
+/* ── Tabs ── */
+.tabs {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px 12px;
+  gap: 0;
+  flex-shrink: 0;
+}
+.tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid transparent;
+  transition: border-color .2s;
+  cursor: default;
+}
+.tabActive  { border-bottom-color: var(--gold); }
+.tabFilled  { border-bottom-color: rgba(185,137,65,.3); }
+.tabLabel {
+  font-size: .65rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--brown); opacity: .5;
+}
+.tabValue {
+  font-size: .95rem; font-weight: 600; color: var(--navy);
+}
+.tabPlaceholder {
+  font-size: .9rem; color: rgba(77,51,35,.35);
+}
+.tabSep {
+  padding: 0 10px; display: flex; align-items: center; justify-content: center;
+  padding-bottom: 8px;
+}
+.tabArrow { color: rgba(77,51,35,.3); font-size: 1rem; }
+.nightsBadge {
+  background: var(--gold); color: #fff;
+  font-size: .7rem; font-weight: 700;
+  letter-spacing: .06em;
+  padding: 3px 8px; border-radius: 20px;
+}
+
+/* ── Instruction strip ── */
+.instruction {
+  background: rgba(185,137,65,.08);
+  border-top: 1px solid rgba(185,137,65,.15);
+  border-bottom: 1px solid rgba(185,137,65,.15);
+  padding: 8px 20px;
+  font-size: .82rem; color: var(--brown);
+  opacity: .7; text-align: center;
+  flex-shrink: 0;
+}
+.doneMsg {
+  display: inline-flex; align-items: center; gap: 5px;
+  color: var(--teal); font-weight: 600; opacity: 1;
+}
+.tabFilled  { border-bottom-color: var(--teal); }
+
+.tabLabel {
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.tabValue {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: .95rem;
+  color: var(--navy);
+  font-weight: 500;
+}
+
+/* ── Nav ── */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px 10px;
+}
+
+.navBtn {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(221,198,157,.6);
+  background: none;
+  color: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  opacity: .6;
+  transition: opacity .2s, background .2s, border-color .2s;
+}
+.navBtn:hover { opacity: 1; border-color: var(--gold); background: rgba(185,137,65,.08); }
+
+.monthTitle {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  letter-spacing: .08em;
+  color: var(--navy);
+}
+
+/* ── Day headers ── */
+.dayHeaders {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 0 20px;
+  margin-bottom: 4px;
+}
+.dayHead {
+  text-align: center;
+  font-size: .65rem;
+  font-weight: 400;
+  color: rgba(26,41,64,.32);
+  letter-spacing: .04em;
+  padding: 4px 0 8px;
+}
+
+/* ── Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 0 20px 16px;
+  gap: 2px 0;
+}
+
+/* ── Day cell ── */
+.day {
+  aspect-ratio: 1;
+  display: flex; align-items: center; justify-content: center;
+  background: none; border: none;
+  border-radius: 50%;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--navy);
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  outline: none;
+  width: 44px; height: 44px;
+  margin: 1px auto;
+}
+.day:not(.dis):not(.start):not(.end):hover {
+  background: rgba(185,137,65,.1);
+  color: var(--gold);
+}
+
+/* disabled/past */
+.dis { color: rgba(26,41,64,.18); cursor: default; font-weight: 300; }
+
+/* today */
+.tod {
+  color: var(--teal);
+  font-weight: 600;
+  box-shadow: 0 0 0 1.5px var(--teal);
+  border-radius: 50%;
+}
+
+/* range band */
+.range {
+  background: rgba(185,137,65,.1);
+  border-radius: 0;
+  color: var(--brown);
+}
+
+/* start — gold circle */
+.start {
+  background: var(--gold) !important;
+  color: #fff !important;
+  font-weight: 700;
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(185,137,65,.4);
+}
+
+/* end — navy circle */
+.end {
+  background: var(--navy) !important;
+  color: #fff !important;
+  font-weight: 700;
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(26,41,64,.3);
+}
+
+/* ── Footer ── */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px 16px;
+  border-top: 1px solid rgba(185,137,65,.2);
+  background: #FAF2E7;
+  flex-shrink: 0;
+  position: sticky;
+  bottom: 0;
+}
+
+.clearBtn {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(77,51,35,.45);
+  background: none; border: none;
+  cursor: pointer;
+  transition: color .2s;
+  padding: 8px 0;
+}
+.clearBtn:hover { color: var(--terracotta); }
+
+.doneBtn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--navy);
+  color: var(--cream);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  padding: 11px 28px;
+  border: none;
+  cursor: pointer;
+  transition: background .2s, opacity .2s;
+  border-radius: 4px;
+}
+.doneBtn:hover:not(:disabled) { background: var(--teal); }
+.doneBtnDisabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+/* ── Mobile responsive ── */
+@media (max-width: 540px) {
+  .card { width: calc(100vw - 24px); border-radius: 14px; }
+  .nav { padding: 14px 16px 8px; }
+  .monthTitle { font-size: 1.1rem; }
+  .dayHeaders { padding: 0 10px; }
+  .grid { padding: 0 10px 12px; gap: 1px 0; }
+  .day { width: 36px; height: 36px; font-size: .95rem; margin: 1px auto; }
+  .footer { padding: 10px 16px 14px; }
+  .doneBtn { padding: 9px 20px; font-size: .64rem; }
+}
+
+@media (max-width: 400px) {
+  .card { width: calc(100vw - 16px); border-radius: 12px; }
+  .nav { padding: 12px 10px 6px; }
+  .monthTitle { font-size: 1rem; }
+  .dayHeaders { padding: 0 6px; }
+  .dayHead { font-size: .58rem; }
+  .grid { padding: 0 6px 10px; }
+  .day { width: 32px; height: 32px; font-size: .88rem; }
+  .footer { padding: 8px 10px 12px; }
+}

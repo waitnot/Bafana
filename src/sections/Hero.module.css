@@ -1,0 +1,181 @@
+/* ── Hero section ── */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+/* ── spacer — only used on mobile ── */
+.spacer { display: none; }
+
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10,18,32,.15) 0%,
+    transparent        20%,
+    rgba(10,18,32,.5)  65%,
+    rgba(10,18,32,.88) 100%
+  );
+}
+
+/* ── Top badge ── */
+.topBadge {
+  position: absolute;
+  top: 100px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 14px;
+  white-space: nowrap; z-index: 2;
+  animation: fadeDown .9s .3s both;
+}
+.badgeLine { width: 36px; height: 1px; background: rgba(185,137,65,.55); }
+.badgeText {
+  font-size: .78rem; font-weight: 500;
+  letter-spacing: .3em; text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+}
+
+/* ── spacer pushes content down ── */
+.spacer { flex: 1; }
+
+/* ── Content ── */
+.content {
+  position: relative; z-index: 2;
+  max-width: 1320px; margin: 0 auto;
+  padding: 0 48px 180px; width: 100%;
+  animation: fadeUp 1s .1s both;
+}
+
+.headline {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: clamp(2.4rem, 5.5vw, 5rem);
+  font-weight: 300; color: #F0EAE0;
+  line-height: 1.08; margin-bottom: 10px;
+  text-shadow: 0 2px 16px rgba(0,0,0,.6), 0 4px 32px rgba(0,0,0,.4);
+}
+
+.headline em, .scriptLine {
+  font-family: 'Great Vibes', cursive;
+  font-style: normal;
+  color: #F5E6C8;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  line-height: 1.0;
+  display: block;
+  text-shadow: 0 2px 16px rgba(0,0,0,.5);
+}
+
+.sub {
+  font-size: 1rem; line-height: 1.7;
+  color: rgba(255,255,255,.88);
+  max-width: 420px; margin-bottom: 24px;
+  text-shadow: 0 1px 10px rgba(0,0,0,.65);
+}
+
+.actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.primaryBtn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold); color: var(--navy);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase;
+  padding: 11px 24px;
+  transition: background .3s, transform .3s;
+}
+.primaryBtn:hover { background: var(--beige); transform: translateY(-2px); }
+
+.ghostBtn {
+  display: inline-flex; align-items: center;
+  border: 1px solid rgba(185,137,65,.6);
+  color: #FAF2E7;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: .22em; text-transform: uppercase;
+  padding: 11px 24px;
+  transition: border-color .3s, color .3s, transform .3s;
+}
+.ghostBtn:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+/* ── Booking bar — pinned to bottom of hero ── */
+.bookingBar {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* ── Scroll cue ── */
+.scrollCue {
+  position: absolute; right: 48px; bottom: 160px;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 10px; z-index: 2;
+}
+.scrollLine {
+  width: 1px; height: 52px;
+  background: linear-gradient(to bottom, transparent, rgba(185,137,65,.7));
+  animation: pulse 2.2s ease-in-out infinite;
+}
+.scrollTxt {
+  font-size: .72rem; letter-spacing: .24em;
+  text-transform: uppercase; color: rgba(255,255,255,.35);
+  writing-mode: vertical-lr;
+}
+
+/* ── Animations ── */
+@keyframes fadeUp   { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeDown { from{opacity:0;transform:translateX(-50%) translateY(-14px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+@keyframes pulse    { 0%,100%{opacity:.2} 50%{opacity:.9} }
+
+/* ══════════════════════════════════
+   Responsive
+   ══════════════════════════════════ */
+
+@media (max-width: 900px) {
+  .content { padding: 0 24px 20px; }
+  .scrollCue { display: none; }
+}
+
+@media (max-width: 768px) {
+  .hero { height: 100dvh; min-height: 100svh; justify-content: space-between; }
+  .spacer { display: block; flex: 1; }
+  .topBadge { display: none; }
+  .content { padding: 0 20px 16px; }
+  .headline { font-size: clamp(1.8rem, 6vw, 2.8rem); margin-bottom: 6px; }
+  .scriptLine { font-size: clamp(2rem, 7vw, 3.2rem); }
+  .sub { max-width: 100%; font-size: .9rem; margin-bottom: 14px; }
+  .actions { gap: 8px; }
+}
+
+@media (max-width: 600px) {
+  .headline { font-size: clamp(1.6rem, 6vw, 2.4rem); }
+  .scriptLine { font-size: clamp(1.9rem, 7vw, 2.8rem); }
+  .sub { font-size: .85rem; margin-bottom: 10px; }
+  .primaryBtn { width: 100%; justify-content: center; padding: 11px 20px; }
+  .ghostBtn { display: none; }
+  .actions { flex-direction: column; gap: 6px; }
+}
+
+@media (max-width: 480px) {
+  .content { padding: 0 16px 12px; }
+  .headline { font-size: clamp(1.5rem, 6vw, 2.2rem); line-height: 1.1; }
+  .scriptLine { font-size: clamp(1.7rem, 7vw, 2.5rem); }
+  .sub { font-size: .82rem; margin-bottom: 8px; }
+}
+
+@media (max-width: 380px) {
+  .content { padding: 0 14px 10px; }
+  .headline { font-size: clamp(1.3rem, 6vw, 1.9rem); }
+  .scriptLine { font-size: clamp(1.5rem, 7vw, 2.2rem); }
+  .sub { font-size: .76rem; }
+}

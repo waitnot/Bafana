@@ -1,0 +1,121 @@
+.footer {
+  background: #F5E6C8;
+  padding: 72px 0 0;
+}
+
+@media (max-width: 768px) { .footer { padding: 48px 0 0; } }
+@media (max-width: 480px) { .footer { padding: 40px 0 0; } }
+@media (max-width: 380px) { .footer { padding: 32px 0 0; } }
+
+.orn {
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  padding-bottom: 64px;
+}
+.oLine { flex:1; max-width:480px; height:1px; background:rgba(184,136,64,.35); }
+.oDot  { width:6px; height:6px; background:var(--gold); transform:rotate(45deg); flex-shrink:0; }
+
+/* top */
+.top {
+  max-width:1320px; margin:0 auto; padding:0 48px 64px;
+  display:grid; grid-template-columns:1.4fr 1fr 1.4fr; gap:64px;
+  border-bottom:1px solid rgba(184,136,64,.25);
+}
+
+/* brand */
+.brand { display:flex; flex-direction:column; }
+
+.logoWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.logoImg {
+  height: 90px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.3));
+  transition: transform .3s, filter .3s;
+}
+.logoWrap:hover .logoImg {
+  transform: scale(1.04);
+  filter: drop-shadow(0 4px 16px rgba(185,137,65,.3));
+}
+.logoText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+.logoA {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: .32em;
+  color: var(--gold);
+  line-height: 1;
+}
+.logoB {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: .6rem;
+  font-weight: 400;
+  letter-spacing: .48em;
+  color: var(--gold);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.tagline { font-size:.92rem; line-height:1.8; color:var(--brown); opacity:.7; max-width:220px; margin-bottom:24px; }
+.socials { display:flex; gap:10px; }
+.soc {
+  width:32px; height:32px; border-radius:50%;
+  border:1px solid rgba(184,136,64,.4);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--gold); transition:border-color .25s, color .25s, background .25s;
+}
+.soc:hover { border-color:var(--gold); background:var(--gold); color:#fff; }
+
+/* cols */
+.col {}
+.colHead { font-size:.76rem; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--brown); margin-bottom:10px; }
+.colRule { width:22px; height:1px; background:var(--gold); opacity:.6; margin-bottom:18px; }
+.colLinks { display:flex; flex-direction:column; gap:11px; }
+.colLink { font-size:.92rem; color:var(--brown); opacity:.65; transition:color .25s, opacity .25s; }
+.colLink:hover { color:var(--gold); opacity:1; }
+
+/* contact */
+.contacts { display:flex; flex-direction:column; gap:14px; }
+.ci { display:flex; align-items:flex-start; gap:10px; font-size:.92rem; line-height:1.5; color:var(--brown); opacity:.7; }
+.ci_icon { color:var(--gold); flex-shrink:0; margin-top:2px; }
+.ciLink { color:var(--brown); text-decoration:none; transition:color .2s; word-break:break-all; }
+.ciLink:hover { color:var(--gold); }
+
+/* bottom */
+.bottom {
+  max-width:1320px; margin:0 auto; padding:20px 48px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.copy { font-size:.82rem; color:var(--brown); opacity:.45; letter-spacing:.05em; }
+.legal { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.legalGroup { display:flex; align-items:center; gap:10px; }
+.legalLink { font-size:.82rem; color:var(--brown); opacity:.45; transition:color .25s, opacity .25s; }
+.legalLink:hover { color:var(--gold); opacity:1; }
+.dot { color:rgba(72,48,32,.2); }
+
+@media (max-width:1100px) { .top { grid-template-columns:1fr 1fr; gap:40px; } }
+@media (max-width:640px) {
+  .top { grid-template-columns:1fr; gap:32px; padding:0 24px 40px; }
+  .bottom { flex-direction:column; gap:10px; text-align:center; padding:16px 24px; }
+  .logoImg { height:68px; }
+  .oLine { max-width:100px; }
+  .orn { padding-bottom:40px; }
+  .tagline { max-width:100%; font-size:.85rem; }
+}
+@media (max-width:380px) {
+  .top { padding:0 14px 32px; gap:24px; }
+  .bottom { padding:14px; }
+  .logoImg { height:56px; }
+  .colLink, .ci { font-size:.82rem; }
+  .copy, .legalLink { font-size:.72rem; }
+}
