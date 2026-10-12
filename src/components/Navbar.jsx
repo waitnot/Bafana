@@ -5,7 +5,6 @@ import logoImg from '../assets/bp-logo.png'
 import s from './Navbar.module.css'
 
 const links = [
-  { label: 'Residences', path: '/projects' },
   { label: 'Amenities',  path: '/amenities' },
   { label: 'Our Story',  path: '/about' },
   { label: 'Contact',    path: '/contact' },

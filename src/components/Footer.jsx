@@ -34,7 +34,7 @@ export default function Footer() {
           <p className={s.colHead}>Navigate</p>
           <div className={s.colRule}/>
           <nav className={s.colLinks}>
-            {[['Home','/'],['Residences','/projects'],['Amenities','/amenities'],['Our Story','/about'],['Contact','/contact']].map(([l,p])=>(
+            {[['Home','/'],['Amenities','/amenities'],['Our Story','/about'],['Contact','/contact']].map(([l,p])=>(
               <Link key={p} to={p} className={s.colLink}>{l}</Link>
             ))}
           </nav>
