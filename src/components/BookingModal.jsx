@@ -74,14 +74,15 @@ function MyBookings({ onClose }) {
   const [bookings, setBookings] = useState(getMyBookings())
   const [cancelId, setCancelId] = useState(null)
 
-  const handleCancel = (idx) => {
+  const handleCancel = async (idx) => {
     const updated = bookings.map((b, i) =>
       i === idx ? { ...b, status: 'Cancelled', cancelledAt: new Date().toISOString() } : b
     )
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated))
     setBookings(updated)
     setCancelId(null)
-    // Also update admin store
+
+    // Update admin localStorage
     const adminBookings = JSON.parse(localStorage.getItem('bp_bookings') || '[]')
     const updatedAdmin = adminBookings.map(b =>
       b.name === bookings[idx].name && b.checkIn === bookings[idx].checkIn
@@ -89,6 +90,19 @@ function MyBookings({ onClose }) {
         : b
     )
     localStorage.setItem('bp_bookings', JSON.stringify(updatedAdmin))
+
+    // Update Neon DB via API
+    try {
+      await fetch('/api/bookings', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: bookings[idx].name,
+          checkIn: bookings[idx].checkIn,
+          status: 'Cancelled',
+        }),
+      })
+    } catch (e) { console.warn('API cancel failed:', e) }
   }
 
   return (

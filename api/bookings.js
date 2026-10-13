@@ -25,10 +25,14 @@ export default async function handler(req, res) {
     return res.json(rows[0])
   }
 
-  // PATCH — update status
+  // PATCH — update status (by id OR by name+checkIn)
   if (req.method === 'PATCH') {
-    const { id, status } = req.body
-    await sql`UPDATE bookings SET status=${status} WHERE id=${id}`
+    const { id, status, name, checkIn } = req.body
+    if (id) {
+      await sql`UPDATE bookings SET status=${status} WHERE id=${id}`
+    } else if (name && checkIn) {
+      await sql`UPDATE bookings SET status=${status} WHERE name=${name} AND check_in=${checkIn}`
+    }
     return res.json({ ok: true })
   }
 
