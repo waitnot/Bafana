@@ -499,3 +499,56 @@
 }
 .dialogConfirm:hover:not(:disabled) { opacity: .88; }
 .dialogConfirm:disabled, .dialogCancel:disabled { opacity: .5; cursor: not-allowed; }
+
+/* ── Cancel booking ── */
+.cancelBtn {
+  margin-top: 8px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #FECACA;
+  background: #FEF2F2;
+  color: #B91C1C;
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s, border-color .2s;
+  width: fit-content;
+}
+.cancelBtn:hover { background: #FEE2E2; border-color: #FCA5A5; }
+
+.cancelConfirm {
+  margin-top: 10px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.cancelConfirmText {
+  font-size: .88rem; color: #B91C1C; font-weight: 500;
+}
+.cancelConfirmActions { display: flex; gap: 8px; }
+.cancelNo {
+  flex: 1; padding: 8px 12px; border-radius: 6px;
+  border: 1px solid var(--beige); background: #fff;
+  color: var(--brown); font-size: .82rem; font-weight: 600;
+  cursor: pointer; transition: border-color .2s;
+}
+.cancelNo:hover { border-color: var(--gold); }
+.cancelYes {
+  flex: 1; padding: 8px 12px; border-radius: 6px;
+  border: none; background: #B91C1C;
+  color: #fff; font-size: .82rem; font-weight: 700;
+  cursor: pointer; transition: opacity .2s;
+}
+.cancelYes:hover { opacity: .85; }
+
+.myBookingBadgeCancelled {
+  background: #FEF2F2 !important;
+  color: #B91C1C !important;
+  border-color: #FECACA !important;
+}
+.cancelledNote {
+  font-size: .76rem; color: #B91C1C; opacity: .7;
+  margin-top: 4px;
+}

@@ -69,9 +69,27 @@ function ConfirmDialog({ form, selectedRoom, onConfirm, onCancel, loading }) {
   )
 }
 
-/* ── My Bookings View ── */
+/* ── My Bookings panel ── */
 function MyBookings({ onClose }) {
-  const bookings = getMyBookings()
+  const [bookings, setBookings] = useState(getMyBookings())
+  const [cancelId, setCancelId] = useState(null)
+
+  const handleCancel = (idx) => {
+    const updated = bookings.map((b, i) =>
+      i === idx ? { ...b, status: 'Cancelled', cancelledAt: new Date().toISOString() } : b
+    )
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated))
+    setBookings(updated)
+    setCancelId(null)
+    // Also update admin store
+    const adminBookings = JSON.parse(localStorage.getItem('bp_bookings') || '[]')
+    const updatedAdmin = adminBookings.map(b =>
+      b.name === bookings[idx].name && b.checkIn === bookings[idx].checkIn
+        ? { ...b, status: 'Cancelled' }
+        : b
+    )
+    localStorage.setItem('bp_bookings', JSON.stringify(updatedAdmin))
+  }
 
   return (
     <div className={s.myBookingsWrap}>
@@ -89,7 +107,12 @@ function MyBookings({ onClose }) {
           {bookings.map((b, i) => (
             <div key={i} className={s.myBookingCard}>
               <div className={s.myBookingStatus}>
-                <span className={s.myBookingBadge}>Submitted</span>
+                <span className={[
+                  s.myBookingBadge,
+                  b.status === 'Cancelled' ? s.myBookingBadgeCancelled : ''
+                ].join(' ')}>
+                  {b.status || 'Submitted'}
+                </span>
                 <span className={s.myBookingDate}>{fmtDate(b.submittedAt)}</span>
               </div>
               <p className={s.myBookingRoom}>{b.room}</p>
@@ -103,6 +126,27 @@ function MyBookings({ onClose }) {
                 <span>·</span>
                 <span>{b.name}</span>
               </div>
+
+              {/* Cancel button — only for non-cancelled bookings */}
+              {b.status !== 'Cancelled' && (
+                cancelId === i ? (
+                  <div className={s.cancelConfirm}>
+                    <p className={s.cancelConfirmText}>Are you sure you want to cancel this booking?</p>
+                    <div className={s.cancelConfirmActions}>
+                      <button className={s.cancelNo} onClick={() => setCancelId(null)}>Keep Booking</button>
+                      <button className={s.cancelYes} onClick={() => handleCancel(i)}>Yes, Cancel</button>
+                    </div>
+                  </div>
+                ) : (
+                  <button className={s.cancelBtn} onClick={() => setCancelId(i)}>
+                    Cancel Booking
+                  </button>
+                )
+              )}
+
+              {b.status === 'Cancelled' && b.cancelledAt && (
+                <p className={s.cancelledNote}>Cancelled on {fmtDate(b.cancelledAt)}</p>
+              )}
             </div>
           ))}
         </div>
