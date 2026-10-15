@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -9,6 +9,14 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import Amenities from './pages/Amenities'
 import Admin from './pages/Admin'
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [pathname])
+  return null
+}
 
 function AppShell() {
   const [bookingOpen, setBookingOpen]   = useState(false)
@@ -39,6 +47,7 @@ function AppShell() {
 
   return (
     <>
+      <ScrollToTop />
       <Navbar onBook={() => openBooking()} />
       <main>
         <Routes>
