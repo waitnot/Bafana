@@ -15,9 +15,9 @@ export default function LocationMap() {
           {/* Map embed */}
           <div className={s.mapWrap}>
             <iframe
-              title="Bafana Pyramids Location"
+              title="Bafana Pyramids Hotel Location"
               className={s.map}
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.5!2d31.1342!3d29.9765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14584587a5b1a7a5%3A0x0!2sPrincess+Street%2C+Giza+Governorate%2C+Egypt!5e0!3m2!1sen!2seg!4v1700000000000!5m2!1sen!2seg"
+              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDgOe4Hu1blqBK1QgII7LIWzdScL0m3OwA&q=Bafana+Pyramids+Hotel+%26+Spa,Princes+Street,Al+Remaya,Giza,Egypt&zoom=16"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -71,7 +71,7 @@ export default function LocationMap() {
               </div>
 
               <a
-                href="https://maps.google.com/?q=Princess+Street,+Giza+Governorate,+Egypt"
+                href="https://maps.app.goo.gl/1WhFW9w8gx1xs7dL6"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={s.directionsBtn}
