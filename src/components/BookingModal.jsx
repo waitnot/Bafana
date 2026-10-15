@@ -5,13 +5,13 @@ import { saveBooking } from '../hooks/useAdminStore'
 import { postBooking } from '../hooks/useApi'
 
 const roomTypes = [
-  { id: 'sq',  label: 'Standard Queen',        sub: 'Queen Bed · Classic Comfort' },
-  { id: 'dk',  label: 'Deluxe King Room',       sub: 'King Bed · Premium Furnishings' },
-  { id: 'dt',  label: 'Deluxe Twin Room',        sub: 'Twin Beds · Premium Furnishings' },
-  { id: 'str', label: 'Standard Triple Room',    sub: 'Triple Occupancy · Spacious' },
-  { id: 'efs', label: 'Executive Family Suite',  sub: 'Family Suite · Expansive Living' },
-  { id: 'res', label: 'Regal Executive Suite',   sub: 'Executive Suite · Refined Luxury' },
-  { id: 'pps', label: 'Premium Pyramid Suite',   sub: 'Signature Suite · Iconic Views' },
+  { id: 'sq',  label: 'Standard Double Room',     sub: 'Comfortable & Convenient' },
+  { id: 'dk',  label: 'Deluxe Twin Room',           sub: 'Individual Comfort, Shared Experience' },
+  { id: 'dt',  label: 'Deluxe Double Room',          sub: 'An Elevated Stay Experience' },
+  { id: 'str', label: 'Standard Triple Room',        sub: 'More Room for Shared Memories' },
+  { id: 'efs', label: 'Executive Family Suite',      sub: 'Togetherness Meets Comfort' },
+  { id: 'res', label: 'Regal Executive Suite',       sub: 'Refined Comfort & Elegance' },
+  { id: 'pps', label: 'Premium Pyramid Suite',       sub: 'An Experience Inspired by Egypt\'s Heritage' },
 ]
 
 const STEPS = ['Your Details', 'Select Room', 'Confirm']

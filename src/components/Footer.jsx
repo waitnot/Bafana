@@ -21,7 +21,7 @@ export default function Footer() {
               <span className={s.logoB}>PYRAMIDS</span>
             </div>
           </Link>
-          <p className={s.tagline}>Crafting landmark residences since 2026.<br/>Egypt · Elegance · Permanence.</p>
+          <p className={s.tagline}>Comfort. Hospitality. Timeless Experiences.<br/>Giza, Cairo – Egypt.</p>
           <div className={s.socials}>
             <a href="#" className={s.soc} aria-label="Instagram"><Instagram size={15}/></a>
             <a href="#" className={s.soc} aria-label="Facebook"><Facebook size={15}/></a>

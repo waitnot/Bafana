@@ -24,16 +24,16 @@ export default function Hero({ onBook }) {
       {/* Content */}
       <div className={s.content}>
         <h1 className={s.headline}>
-          A Residence<br />
-          <em className={s.scriptLine}>Beyond Compare</em>
+          Bafana Pyramids<br />
+          <em className={s.scriptLine}>Hotel & Spa</em>
         </h1>
         <p className={s.sub}>
-          Where neoclassical grandeur meets the warmth of Egyptian heritage craftsmanship.
+          Your Gateway to Egypt's Timeless Wonders — Giza, Cairo.
         </p>
         <div className={s.actions}>
-          <Link to="/projects" className={s.primaryBtn}>
-            Explore Residences <ArrowRight size={14} />
-          </Link>
+          <a href="#collection" className={s.primaryBtn}>
+            Explore Rooms <ArrowRight size={14} />
+          </a>
           <button className={s.ghostBtn} onClick={onBook}>Book a Consultation</button>
         </div>
       </div>

@@ -15,12 +15,11 @@ export default function CTABanner() {
           <span className={s.script}>Today</span>
         </h2>
         <p className={s.sub}>
-          Our private consultants are available to guide you through<br />
-          the finest residences in the Bafana Pyramids collection.
+          Our reservations team is available to assist with room enquiries,<br />
+          group accommodation and sightseeing itineraries in Cairo & Giza.
         </p>
         <div className={s.actions}>
           <Link to="/contact" className={s.primary}>Book a Private Consultation <ArrowRight size={14}/></Link>
-          <Link to="/projects" className={s.ghost}>Explore the Collection</Link>
         </div>
       </div>
     </section>
