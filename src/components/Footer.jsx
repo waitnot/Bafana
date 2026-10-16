@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { MapPin, Phone, Mail, Instagram, Facebook, Youtube } from 'lucide-react'
 import logoImg from '../assets/bp-logo.png'
+import brandText from '../assets/brand-text.png'
 import s from './Footer.module.css'
 
 export default function Footer() {
@@ -16,10 +17,7 @@ export default function Footer() {
         <div className={s.brand}>
           <Link to="/" className={s.logoWrap}>
             <img src={logoImg} alt="Bafana Pyramids" className={s.logoImg} />
-            <div className={s.logoText}>
-              <span className={s.logoA}>BAFANA</span>
-              <span className={s.logoB}>PYRAMIDS</span>
-            </div>
+            <img src={brandText} alt="Bafana Pyramids Hotel & Spa" className={s.brandText} />
           </Link>
           <p className={s.tagline}>Comfort. Hospitality. Timeless Experiences.<br/>Giza, Cairo – Egypt.</p>
           <div className={s.socials}>
