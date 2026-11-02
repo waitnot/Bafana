@@ -52,10 +52,10 @@ export default function Editorial() {
             Situated in Egypt's most coveted micro-markets, each Bafana Pyramids address commands
             unmatched prestige, connectivity, and long-term value appreciation.
           </p>
-          <Link to="/projects" className={s.textLink}>
-            View All Residences
+          <a href="#collection" className={s.textLink}>
+            View Our Rooms
             <span className={s.textLinkLine} />
-          </Link>
+          </a>
         </div>
         <div className={s.imgPane}>
           <img src={slide12} alt="Heritage Court Giza" className={s.img2} />
