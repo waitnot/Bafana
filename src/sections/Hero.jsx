@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
-import coverImg from '../assets/main.png'
+import coverImg from '../assets/hero-main.jpg'
 import BookingBar from '../components/BookingBar'
 import s from './Hero.module.css'
 
