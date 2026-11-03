@@ -1,4 +1,4 @@
-import coverImg from '../assets/hero-main.jpg'
+import coverImg from '../assets/sunset.png'
 import BookingBar from '../components/BookingBar'
 import s from './Hero.module.css'
 
