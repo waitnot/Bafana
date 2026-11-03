@@ -4,29 +4,25 @@
 
 .hero {
   position: relative;
-  /* Use dynamic viewport height so mobile browser chrome doesn't cause overflow */
-  height: 100dvh;
-  min-height: 500px;
-  max-height: 1200px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   overflow: hidden;
+  background: #0a1220;
 }
 
 /* ── Background image ── */
 .bg {
-  position: absolute;
-  inset: 0;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* Focus on center of the hotel building */
-  object-position: center center;
+  height: auto;
   display: block;
+  /* Show full image — no cropping */
+  object-fit: contain;
+  object-position: center top;
 }
 
-/* ── Booking bar pinned to bottom ── */
+/* ── Booking bar pinned below image ── */
 .bookingBar {
   position: relative;
   z-index: 10;
@@ -35,44 +31,42 @@
 }
 
 /* ══════════════════════════════════
-   Tablet (≤1024px)
+   Desktop — image fills full viewport height
    ══════════════════════════════════ */
-@media (max-width: 1024px) {
-  .hero { max-height: none; }
-  .bg { object-position: 60% center; }
+@media (min-width: 769px) {
+  .hero {
+    height: 100dvh;
+    min-height: 600px;
+  }
+  .bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
 }
 
 /* ══════════════════════════════════
-   Mobile landscape + small tablet (≤768px)
+   Mobile (≤768px) — show full image, no crop
    ══════════════════════════════════ */
 @media (max-width: 768px) {
   .hero {
-    height: 100dvh;
-    min-height: 480px;
+    height: auto;
+    min-height: unset;
   }
-  /* Show more of the building on portrait mobile */
-  .bg { object-position: 55% center; }
-}
-
-/* ══════════════════════════════════
-   Mobile portrait (≤480px)
-   ══════════════════════════════════ */
-@media (max-width: 480px) {
-  .hero {
-    min-height: 420px;
+  .bg {
+    position: relative;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center top;
   }
-  .bg { object-position: 50% center; }
 }
 
-/* ══════════════════════════════════
-   Small phones (≤380px)
-   ══════════════════════════════════ */
-@media (max-width: 380px) {
-  .hero { min-height: 380px; }
-}
-
-/* ── Landscape phone — don't let hero eat full screen ── */
+/* ── Landscape phone ── */
 @media (max-height: 500px) and (orientation: landscape) {
-  .hero { height: auto; min-height: 320px; }
-  .bg { position: relative; height: 320px; }
+  .hero { height: auto; }
+  .bg { object-fit: cover; height: 320px; }
 }
