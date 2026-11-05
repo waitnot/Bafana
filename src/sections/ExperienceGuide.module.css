@@ -19,9 +19,11 @@
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
-  max-width: 680px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  width: 100%;
 }
 
 /* ── Left ── */
@@ -146,4 +148,75 @@
   .inner { padding: 0 16px; }
   .downloadBtn { width: 100%; justify-content: center; }
   .pdfCard { max-width: 100%; }
+}
+
+/* ── Right column ── */
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.factsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.factCard {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(185,137,65,.2);
+  border-radius: 10px;
+  padding: 20px 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  transition: border-color .25s, background .25s;
+}
+.factCard:hover { border-color: rgba(185,137,65,.4); background: rgba(255,255,255,.08); }
+
+.factIcon {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: rgba(185,137,65,.12);
+  border: 1px solid rgba(185,137,65,.25);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); flex-shrink: 0;
+}
+
+.factBody { flex: 1; }
+.factLabel {
+  font-size: .72rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--gold); opacity: .8; margin-bottom: 4px;
+}
+.factValue {
+  font-size: .92rem; color: var(--cream);
+  line-height: 1.4;
+}
+
+.quoteBox {
+  background: rgba(185,137,65,.08);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 20px 24px;
+}
+.quoteText {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.05rem; font-style: italic;
+  color: rgba(250,242,231,.8);
+  line-height: 1.7; margin-bottom: 10px;
+}
+.quoteAuthor {
+  font-size: .78rem; color: var(--gold);
+  letter-spacing: .08em; font-weight: 600;
+}
+
+/* responsive */
+@media (max-width: 960px) {
+  .content { grid-template-columns: 1fr; gap: 48px; }
+  .factsGrid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .factsGrid { grid-template-columns: 1fr; }
+  .downloadBtn { width: 100%; justify-content: center; }
 }
