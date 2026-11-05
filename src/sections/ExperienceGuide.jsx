@@ -1,4 +1,4 @@
-import { Download, MapPin, Compass, Camera, Star } from 'lucide-react'
+import { FileText, MapPin, Compass, Camera, Star } from 'lucide-react'
 import s from './ExperienceGuide.module.css'
 
 const highlights = [
@@ -12,9 +12,8 @@ export default function ExperienceGuide() {
   return (
     <section className={s.section}>
       <div className={s.inner}>
-
         <div className={s.content}>
-          {/* Left — text */}
+          {/* Left — text only, no right card */}
           <div className={s.left}>
             <div className={s.orn}>
               <span className={s.oLine}/><span className={s.oDot}/><span className={s.oLine}/>
@@ -39,43 +38,19 @@ export default function ExperienceGuide() {
               ))}
             </ul>
 
+            {/* Opens PDF in new tab — no download */}
             <a
               href="/Bafana-Experience.pdf"
-              download="Bafana-Experience-Guide.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className={s.downloadBtn}
             >
-              <Download size={18} />
-              Download Experience Guide
+              <FileText size={18} />
+              View Experience Guide
             </a>
-            <p className={s.hint}>Free PDF · Instant download</p>
-          </div>
-
-          {/* Right — PDF preview card */}
-          <div className={s.right}>
-            <div className={s.pdfCard}>
-              <div className={s.pdfIcon}>
-                <svg viewBox="0 0 64 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="56" height="70">
-                  <rect width="64" height="80" rx="6" fill="rgba(185,137,65,.15)"/>
-                  <rect x="8" y="8" width="48" height="64" rx="4" fill="rgba(185,137,65,.08)" stroke="rgba(185,137,65,.3)" strokeWidth="1"/>
-                  <text x="32" y="38" textAnchor="middle" fontFamily="serif" fontSize="14" fontWeight="700" fill="rgba(185,137,65,.9)">PDF</text>
-                  <rect x="16" y="46" width="32" height="2" rx="1" fill="rgba(185,137,65,.4)"/>
-                  <rect x="16" y="52" width="24" height="2" rx="1" fill="rgba(185,137,65,.25)"/>
-                  <rect x="16" y="58" width="28" height="2" rx="1" fill="rgba(185,137,65,.2)"/>
-                </svg>
-              </div>
-              <p className={s.pdfTitle}>Bafana Experience Guide</p>
-              <p className={s.pdfSub}>Tourist & Attractions Guide<br/>Giza · Cairo · Egypt</p>
-              <a
-                href="/Bafana-Experience.pdf"
-                download="Bafana-Experience-Guide.pdf"
-                className={s.pdfDownload}
-              >
-                <Download size={15}/> Download PDF
-              </a>
-            </div>
+            <p className={s.hint}>Free PDF · Opens in new tab</p>
           </div>
         </div>
-
       </div>
     </section>
   )
