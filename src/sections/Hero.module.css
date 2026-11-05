@@ -12,7 +12,7 @@
   background: #0a1220;
 }
 
-/* ── Booking bar ── */
+/* ── Desktop booking bar ── */
 .bookingBar {
   position: relative;
   z-index: 10;
@@ -20,8 +20,13 @@
   flex-shrink: 0;
 }
 
+/* ── Mobile hero block (hidden on desktop) ── */
+.mobileHero { display: none; }
+.mobileLogo { display: none; }
+.mobileBooking { display: none; }
+
 /* ════════════════════════════════
-   DESKTOP (>768px) — landscape image, full viewport height
+   DESKTOP (>768px)
    ════════════════════════════════ */
 .bgDesktop {
   position: absolute;
@@ -33,46 +38,56 @@
   display: block;
 }
 
-.bgMobile {
-  display: none;
-}
-
 .hero {
   height: 100dvh;
   min-height: 600px;
 }
 
 /* ════════════════════════════════
-   MOBILE (≤768px) — portrait image, show fully
+   MOBILE (≤768px)
    ════════════════════════════════ */
 @media (max-width: 768px) {
   .hero {
     height: auto;
     min-height: unset;
+    background: var(--cream);
   }
 
   /* Hide desktop image */
-  .bgDesktop {
-    display: none;
+  .bgDesktop { display: none; }
+
+  /* Hide desktop booking bar */
+  .bookingBar { display: none; }
+
+  /* Show mobile block */
+  .mobileHero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background: var(--cream);
   }
 
-  /* Show mobile portrait image fully */
-  .bgMobile {
+  /* Logo as full-width image */
+  .mobileLogo {
     display: block;
-    position: relative;
     width: 100%;
     height: auto;
     object-fit: contain;
-    object-position: center top;
+  }
+
+  /* Booking bar sits directly below logo, part of same block */
+  .mobileBooking {
+    display: block;
+    width: 100%;
+    background: var(--cream);
+    padding: 0 0 12px;
   }
 }
 
 /* ── Landscape phone ── */
 @media (max-height: 500px) and (orientation: landscape) {
-  .hero {
-    height: 100dvh;
-    min-height: 300px;
-  }
+  .hero { height: 100dvh; min-height: 300px; }
   .bgDesktop {
     display: block;
     position: absolute;
@@ -81,5 +96,6 @@
     height: 100%;
     object-fit: cover;
   }
-  .bgMobile { display: none; }
+  .mobileHero { display: none; }
+  .bookingBar { display: block; }
 }
