@@ -4,12 +4,12 @@ import { useState } from 'react'
 import { ArrowRight } from 'lucide-react'
 import s from './Projects.module.css'
 
-import img01 from '../assets/slide-03.jpg'
-import img02 from '../assets/slide-07.jpg'
-import img03 from '../assets/slide-10.jpg'
-import img04 from '../assets/slide-15.jpg'
-import img05 from '../assets/slide-19.jpg'
-import img06 from '../assets/slide-23.jpg'
+const img01 = '/assets/slide-03.jpg'
+const img02 = '/assets/slide-07.jpg'
+const img03 = '/assets/slide-10.jpg'
+const img04 = '/assets/slide-15.jpg'
+const img05 = '/assets/slide-19.jpg'
+const img06 = '/assets/slide-23.jpg'
 
 const filters = ['All', 'Ready to Move', 'Under Construction', 'New Launch']
 
@@ -80,6 +80,7 @@ export default function Projects() {
     </>
   )
 }
+
 
 
 

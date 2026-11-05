@@ -1,7 +1,7 @@
 'use client'
 
 import s from './Craftsmanship.module.css'
-import craftImg from '../assets/reception-lobby-4.jpg'
+const craftImg = '/assets/reception-lobby-4.jpg'
 
 const pillars = [
   { num: '01', title: 'Neoclassical Architecture',  desc: 'Facades inspired by 16th-century Italian palazzi, rendered in premium stone with handcrafted detailing.' },
@@ -45,6 +45,7 @@ export default function Craftsmanship() {
     </section>
   )
 }
+
 
 
 

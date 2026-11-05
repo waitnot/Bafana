@@ -2,7 +2,7 @@
 
 import { Shield, Award, Home, Wrench } from 'lucide-react'
 import s from './WhyUs.module.css'
-import whyImg from '../assets/reception-lobby-2.jpg'
+const whyImg = '/assets/reception-lobby-2.jpg'
 
 const features = [
   { icon: <Shield size={22}/>, title: 'Trust & Transparency',  desc: 'RERA registered. Clear pricing. Complete documentation. Zero hidden charges.' },
@@ -44,6 +44,7 @@ export default function WhyUs() {
     </section>
   )
 }
+
 
 
 

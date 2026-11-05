@@ -11,7 +11,7 @@ import {
   updateBookingStatus, updateConsultationStatus,
   deleteBooking, deleteConsultation, deleteReview,
 } from '../hooks/useApi'
-import logoImg from '../assets/bp-logo.png'
+const logoImg = '/assets/bp-logo.png'
 
 const PASS = 'bafana2026'
 
@@ -540,6 +540,7 @@ export default function Admin() {
     </div>
   )
 }
+
 
 
 

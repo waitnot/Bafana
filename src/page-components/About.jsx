@@ -1,7 +1,7 @@
 'use client'
 
 import s from './About.module.css'
-import aboutImg from '../assets/slide-20.jpg'
+const aboutImg = '/assets/slide-20.jpg'
 
 const milestones = [
   { year:'2026', event:'Founded in Giza, Cairo — combining Egyptian heritage with modern hospitality.' },
@@ -144,6 +144,7 @@ export default function About() {
     </>
   )
 }
+
 
 
 

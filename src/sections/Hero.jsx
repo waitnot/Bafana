@@ -1,7 +1,7 @@
 'use client'
 
-import desktopImg from '../assets/sunset.png'
-import mobileImg from '../assets/hero-mobile.png'
+const desktopImg = '/assets/sunset.png'
+const mobileImg = '/assets/hero-mobile.png'
 import BookingBar from '../components/BookingBar'
 import s from './Hero.module.css'
 
@@ -20,6 +20,7 @@ export default function Hero({ onBook }) {
     </section>
   )
 }
+
 
 
 

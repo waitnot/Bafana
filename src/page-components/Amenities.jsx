@@ -1,7 +1,7 @@
 'use client'
 
 import s from './Amenities.module.css'
-import amenitiesImg from '../assets/slide-08.jpg'
+const amenitiesImg = '/assets/slide-08.jpg'
 
 const amenities = [
   { num:'01', title:'Air-Conditioned Rooms',     desc:'All guest rooms and suites feature full air-conditioning for a comfortable stay throughout the year.' },
@@ -73,6 +73,7 @@ export default function Amenities() {
     </>
   )
 }
+
 
 
 

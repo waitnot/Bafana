@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import slide05 from '../assets/reception-lobby-3.jpg'
-import slide12 from '../assets/longue3.jpeg'
+const slide05 = '/assets/reception-lobby-3.jpg'
+const slide12 = '/assets/longue3.jpeg'
 import s from './Editorial.module.css'
 
 export default function Editorial() {
@@ -67,6 +67,7 @@ export default function Editorial() {
     </section>
   )
 }
+
 
 
 

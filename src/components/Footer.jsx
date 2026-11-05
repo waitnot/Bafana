@@ -2,8 +2,8 @@
 
 import Link from 'next/link'
 import { MapPin, Phone, Mail, Instagram, Facebook, Youtube } from 'lucide-react'
-import logoImg from '../assets/bp-logo.png'
-import brandText from '../assets/brand-text.png'
+const logoImg = '/assets/bp-logo.png'
+const brandText = '/assets/brand-text.png'
 import s from './Footer.module.css'
 
 export default function Footer() {
@@ -65,6 +65,7 @@ export default function Footer() {
     </footer>
   )
 }
+
 
 
 

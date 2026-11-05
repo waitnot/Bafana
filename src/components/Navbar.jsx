@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
-import logoImg from '../assets/bp-logo.png'
-import brandText from '../assets/brand-text.png'
+const logoImg = '/assets/bp-logo.png'
+const brandText = '/assets/brand-text.png'
 import s from './Navbar.module.css'
 
 const links = [
@@ -74,6 +74,7 @@ export default function Navbar({ onBook }) {
     </header>
   )
 }
+
 
 
 
