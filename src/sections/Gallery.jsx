@@ -6,10 +6,10 @@ import s from './Gallery.module.css'
 
 const slides = Array.from({ length: 39 }, (_, i) => {
   const n = String(i + 1).padStart(2, '0')
-  return new URL(`../assets/slide-${n}.jpg`, import.meta.url).href
+  return `/assets/slide-${n}.jpg`
 })
 
-const coverUrl = new URL('../assets/cover.jpg', import.meta.url).href
+const coverUrl = '/assets/cover.jpg'
 const allSlides = [coverUrl, ...slides]
 
 const row1 = allSlides.slice(0, 20)

@@ -5,32 +5,29 @@ import { ArrowRight, BedDouble, Maximize2, Star, Award, X, Phone, Mail } from 'l
 import Link from 'next/link'
 import s from './Collection.module.css'
 
-import sqImg1  from '../assets/rooms/standard-queen/bedroom-1.jpeg'
-import sqImg2  from '../assets/rooms/standard-queen/bedroom-2.jpeg'
-import sqImg3  from '../assets/rooms/standard-queen/bedroom-3.jpeg'
-import dkImg1  from '../assets/rooms/deluxe-king/deluxe-king-1.jpg'
-import dkImg2  from '../assets/rooms/deluxe-king/deluxe-king-2.jpg'
-import dkImg3  from '../assets/rooms/deluxe-king/deluxe-king-3.jpg'
-import dtImg1  from '../assets/rooms/deluxe-twin/deluxe-twin-1.jpg'
-import dtImg2  from '../assets/rooms/deluxe-twin/deluxe-twin-2.jpg'
-import dtImg3  from '../assets/rooms/deluxe-twin/deluxe-twin-3.jpg'
-import stImg1  from '../assets/rooms/standard-triple/triple-1.jpg'
-import stImg2  from '../assets/rooms/standard-triple/triple-2.jpg'
-import stImg3  from '../assets/rooms/standard-triple/triple-3.jpg'
-import efImg1  from '../assets/rooms/executive-family-suite/exec-family-1.jpg'
+// Room images served from /public/assets/rooms/
+const sqImg1  = '/assets/rooms/standard-queen/bedroom-1.jpeg'
+const sqImg2  = '/assets/rooms/standard-queen/bedroom-2.jpeg'
+const sqImg3  = '/assets/rooms/standard-queen/bedroom-3.jpeg'
+const dkImg1  = '/assets/rooms/deluxe-king/deluxe-king-1.jpg'
+const dkImg2  = '/assets/rooms/deluxe-king/deluxe-king-2.jpg'
+const dkImg3  = '/assets/rooms/deluxe-king/deluxe-king-3.jpg'
+const dtImg1  = '/assets/rooms/deluxe-twin/deluxe-twin-1.jpg'
+const dtImg2  = '/assets/rooms/deluxe-twin/deluxe-twin-2.jpg'
+const dtImg3  = '/assets/rooms/deluxe-twin/deluxe-twin-3.jpg'
+const stImg1  = '/assets/rooms/standard-triple/triple-1.jpg'
+const stImg2  = '/assets/rooms/standard-triple/triple-2.jpg'
+const stImg3  = '/assets/rooms/standard-triple/triple-3.jpg'
+const efImg1  = '/assets/rooms/executive-family-suite/exec-family-1.jpg'
+const reImg1  = '/assets/rooms/regal-executive-suite/regal-1.jpg'
+const reImg2  = '/assets/rooms/regal-executive-suite/regal-2.jpg'
 
-// Executive Family Suite extra images — HEIC converted to JPEG in public/
 const execFamilyImgs = [
   efImg1,
   '/rooms/executive-family-suite/exec-family-2.jpg',
   '/rooms/executive-family-suite/exec-family-3.jpg',
 ]
 
-// Regal Executive Suite — 2 JPGs importable, rest served as public/ static URLs
-import reImg1  from '../assets/rooms/regal-executive-suite/regal-1.jpg'
-import reImg2  from '../assets/rooms/regal-executive-suite/regal-2.jpg'
-
-// Regal HEICs converted to JPEG and served from public/
 const regalHEIC = [
   '/rooms/regal-executive-suite/regal-3.jpg',
   '/rooms/regal-executive-suite/regal-4.jpg',
@@ -38,7 +35,7 @@ const regalHEIC = [
   '/rooms/regal-executive-suite/regal-6.jpg',
   '/rooms/regal-executive-suite/regal-7.jpg',
 ]
-// Premium Pyramid Suite — all converted to JPEG in public/
+
 const pyramidImgs = [
   '/rooms/premium-pyramid-suite/pyramid-1.jpg',
   '/rooms/premium-pyramid-suite/pyramid-2.jpg',
