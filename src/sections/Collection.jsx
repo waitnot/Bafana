@@ -200,7 +200,7 @@ function PropertyModal({ residence, onClose, onBook }) {
                       Book Now <ArrowRight size={14} />
                     </button>
                     <a href="https://wa.me/201034962229" target="_blank" rel="noopener noreferrer" className={s.modalBtnSecondary}>
-                      <Phone size={13} /> WhatsApp Enquiry
+                      <Phone size={13} /> WhatsApp Us
                     </a>
                   </div>
                   <div className={s.modalContact}>

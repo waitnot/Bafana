@@ -99,7 +99,7 @@ export default function Contact() {
             <div className={s.infoList}>
               {[
                 { icon:<MapPin size={16}/>, lbl:'Address', val:'Princess Street, Al Remaya,\nKafr Nassar, Al Haram,\nGiza Governorate 3515001', href: null },
-                { icon:<Phone  size={16}/>, lbl:'Phone',        val:'+20 1034 962 229',  href: 'https://wa.me/201034962229' },
+                { icon:<Phone  size={16}/>, lbl:'Phone', val:'+20 1034 962 229', href: 'https://wa.me/201034962229' },
                 { icon:<Mail   size={16}/>, lbl:'Email',        val:'info@bafanapyramidshotel.com',              href: 'mailto:info@bafanapyramidshotel.com' },
                 { icon:<Clock  size={16}/>, lbl:'Office Hours', val:'Mon–Sat: 9:00 AM – 7:00 PM',               href: null },
               ].map((it,i) => (
