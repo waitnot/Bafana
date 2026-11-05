@@ -50,38 +50,45 @@
   .hero {
     height: auto;
     min-height: unset;
-    background: var(--cream);
+    background: #0a1220;
+    /* Start from top of page — behind navbar */
+    margin-top: 0;
+    padding-top: 0;
   }
 
-  /* Hide desktop image */
+  /* Hide desktop image and its booking bar */
   .bgDesktop { display: none; }
-
-  /* Hide desktop booking bar */
   .bookingBar { display: none; }
 
   /* Show mobile block */
   .mobileHero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: block;
+    position: relative;
     width: 100%;
-    background: var(--cream);
   }
 
-  /* Logo as full-width image */
+  /* Portrait image fills full width, starts from very top (behind navbar) */
   .mobileLogo {
     display: block;
     width: 100%;
     height: auto;
     object-fit: contain;
+    object-position: center top;
+    /* Pull image up to sit behind the fixed navbar */
+    margin-top: -76px;
+    padding-top: 76px;
   }
 
-  /* Booking bar sits directly below logo, part of same block */
+  /* Booking bar overlaid at bottom of the image */
   .mobileBooking {
     display: block;
-    width: 100%;
-    background: var(--cream);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
     padding: 0 0 12px;
+    background: linear-gradient(to top, rgba(10,16,26,.85) 0%, transparent 100%);
   }
 }
 
