@@ -402,9 +402,9 @@ export default function Collection({ onBook }) {
       {/* ── Feature Ribbon ── */}
       <div className={s.ribbon}>
         <div className={s.ribbonInner}>
-          {[...Array(2)].flatMap(() =>
+          {[...Array(2)].flatMap((_, loopIdx) =>
             ['Private Concierge', 'Five-Star Amenities', 'Egyptian Craftsmanship', 'Limited Inventory', 'Curated Addresses', 'Lifetime Membership'].map((item, i) => (
-              <span key={item + i} className={s.ribbonItem}>
+              <span key={`${loopIdx}-${item}-${i}`} className={s.ribbonItem}>
                 <Award size={11} className={s.ribbonIcon} />{item}
               </span>
             ))
