@@ -32,7 +32,7 @@ export default function Editorial() {
             Our architects and designers collaborate with global artisans to deliver spaces that
             transcend the ordinary and become enduring masterpieces.
           </p>
-          <Link to="/about" className={s.textLink}>
+          <Link href="/about" className={s.textLink}>
             Discover Our Story
             <span className={s.textLinkLine} />
           </Link>
@@ -67,6 +67,7 @@ export default function Editorial() {
     </section>
   )
 }
+
 
 
 

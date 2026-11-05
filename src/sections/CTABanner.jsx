@@ -21,12 +21,13 @@ export default function CTABanner() {
           group accommodation and sightseeing itineraries in Cairo & Giza.
         </p>
         <div className={s.actions}>
-          <Link to="/contact" className={s.primary}>Book a Private Consultation <ArrowRight size={14}/></Link>
+          <Link href="/contact" className={s.primary}>Book a Private Consultation <ArrowRight size={14}/></Link>
         </div>
       </div>
     </section>
   )
 }
+
 
 
 

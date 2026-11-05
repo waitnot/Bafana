@@ -17,7 +17,7 @@ export default function Footer() {
       <div className={s.top}>
         {/* Brand */}
         <div className={s.brand}>
-          <Link to="/" className={s.logoWrap}>
+          <Link href="/" className={s.logoWrap}>
             <img src={logoImg} alt="Bafana Pyramids" className={s.logoImg} />
             <img src={brandText} alt="Bafana Pyramids Hotel & Spa" className={s.brandText} />
           </Link>
@@ -35,7 +35,7 @@ export default function Footer() {
           <div className={s.colRule}/>
           <nav className={s.colLinks}>
             {[['Home','/'],['Amenities','/amenities'],['About','/about'],['Contact','/contact']].map(([l,p])=>(
-              <Link key={p} to={p} className={s.colLink}>{l}</Link>
+              <Link key={p} href={p} className={s.colLink}>{l}</Link>
             ))}
           </nav>
         </div>
@@ -65,6 +65,7 @@ export default function Footer() {
     </footer>
   )
 }
+
 
 
 

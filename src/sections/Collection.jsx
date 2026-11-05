@@ -471,7 +471,7 @@ export default function Collection({ onBook }) {
 
       {/* CTA */}
       <div className={s.cta}>
-        <Link to="/contact" className={s.ctaBtn}>
+        <Link href="/contact" className={s.ctaBtn}>
           Book Your Stay <ArrowRight size={14} />
         </Link>
         <p className={s.ctaSub}>All room types · Special packages · Private enquiries</p>
@@ -484,6 +484,7 @@ export default function Collection({ onBook }) {
     </section>
   )
 }
+
 
 
 

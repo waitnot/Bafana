@@ -127,8 +127,8 @@ export default function HeroSlider() {
             Where neoclassical grandeur meets the warmth of Egyptian heritage craftsmanship.
           </p>
           <div className={s.actions}>
-            <Link to="/projects" className={s.primaryBtn}>Explore Residences</Link>
-            <Link to="/contact" className={s.ghostBtn}>Private Consultation</Link>
+            <Link href="/projects" className={s.primaryBtn}>Explore Residences</Link>
+            <Link href="/contact" className={s.ghostBtn}>Private Consultation</Link>
           </div>
         </div>
       </div>
@@ -199,6 +199,7 @@ export default function HeroSlider() {
     </section>
   )
 }
+
 
 
 

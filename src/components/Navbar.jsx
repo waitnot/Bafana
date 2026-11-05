@@ -34,14 +34,14 @@ export default function Navbar({ onBook }) {
         {/* Left nav */}
         <nav className={s.group}>
           {links.slice(0, 2).map(l => (
-            <Link key={l.path} to={l.path} className={[s.link, pathname === l.path ? s.active : ''].join(' ')}>
+            <Link key={l.path} href={l.path} className={[s.link, pathname === l.path ? s.active : ''].join(' ')}>
               {l.label}
             </Link>
           ))}
         </nav>
 
         {/* Logo */}
-        <Link to="/" className={s.logo}>
+        <Link href="/" className={s.logo}>
           <img src={logoImg} alt="Bafana Pyramids" className={s.logoImg} />
           <img src={brandText} alt="Bafana Pyramids" className={s.brandText} />
         </Link>
@@ -49,7 +49,7 @@ export default function Navbar({ onBook }) {
         {/* Right nav */}
         <nav className={s.group}>
           {links.slice(2).map(l => (
-            <Link key={l.path} to={l.path} className={[s.link, pathname === l.path ? s.active : ''].join(' ')}>
+            <Link key={l.path} href={l.path} className={[s.link, pathname === l.path ? s.active : ''].join(' ')}>
               {l.label}
             </Link>
           ))}
@@ -65,7 +65,7 @@ export default function Navbar({ onBook }) {
       {/* Mobile drawer */}
       <div className={[s.drawer, open ? s.drawerOpen : ''].join(' ')}>
         {links.map(l => (
-          <Link key={l.path} to={l.path} className={[s.drawerLink, pathname === l.path ? s.drawerActive : ''].join(' ')}>
+          <Link key={l.path} href={l.path} className={[s.drawerLink, pathname === l.path ? s.drawerActive : ''].join(' ')}>
             {l.label}
           </Link>
         ))}
@@ -74,6 +74,7 @@ export default function Navbar({ onBook }) {
     </header>
   )
 }
+
 
 
 
