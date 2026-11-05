@@ -34,7 +34,7 @@ export default function LocationMap() {
                 <div className={s.iconWrap}><MapPin size={18} /></div>
                 <div>
                   <p className={s.infoLabel}>Address</p>
-                  <p className={s.infoValue}>Princess Street<br/>Giza Governorate, Egypt</p>
+                  <p className={s.infoValue}>Princess Street, Al Remaya,<br/>Kafr Nassar, Al Haram,<br/>Giza Governorate 3515001</p>
                 </div>
               </div>
 
@@ -44,7 +44,7 @@ export default function LocationMap() {
                 <div className={s.iconWrap}><Phone size={18} /></div>
                 <div>
                   <p className={s.infoLabel}>Phone</p>
-                  <a href="tel:+201034962229" className={s.infoLink}>+20 1034 962 229</a>
+                  <a href="https://wa.me/201034962229" target="_blank" rel="noopener noreferrer" className={s.infoLink}>+20 1034 962 229</a>
                 </div>
               </div>
 

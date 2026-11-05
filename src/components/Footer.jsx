@@ -42,8 +42,8 @@ export default function Footer() {
           <p className={s.colHead}>Find Us</p>
           <div className={s.colRule}/>
           <div className={s.contacts}>
-            <div className={s.ci}><MapPin size={13} className={s.ci_icon}/><span>Princess Street,<br/>Giza Governorate, Egypt</span></div>
-            <div className={s.ci}><Phone  size={13} className={s.ci_icon}/><a href="tel:+201034962229" className={s.ciLink}>+20 1034 962 229</a></div>
+            <div className={s.ci}><MapPin size={13} className={s.ci_icon}/><span>Princess Street, Al Remaya,<br/>Kafr Nassar, Al Haram,<br/>Giza Governorate 3515001</span></div>
+            <div className={s.ci}><Phone  size={13} className={s.ci_icon}/><a href="https://wa.me/201034962229" target="_blank" rel="noopener noreferrer" className={s.ciLink}>+20 1034 962 229</a></div>
             <div className={s.ci}><Mail   size={13} className={s.ci_icon}/><a href="mailto:info@bafanapyramidshotel.com" className={s.ciLink}>info@bafanapyramidshotel.com</a></div>
           </div>
         </div>

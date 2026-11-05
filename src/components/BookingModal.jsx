@@ -319,7 +319,7 @@ export default function BookingModal({ onClose, initialRoom = null, initialCheck
                     <div className={s.successRow}><span>Guests</span><span>{form.guests}</span></div>
                   </div>
                   <div className={s.successContact}>
-                    <a href="tel:+201034962229" className={s.successContactLink}><Phone size={13}/> +20 1034 962 229</a>
+                    <a href="https://wa.me/201034962229" target="_blank" rel="noopener noreferrer" className={s.successContactLink}><Phone size={13}/> +20 1034 962 229</a>
                     <a href="mailto:info@bafanapyramidshotel.com" className={s.successContactLink}><Mail size={13}/> info@bafanapyramidshotel.com</a>
                   </div>
                   <div style={{ display:'flex', gap:12, marginTop:8 }}>
@@ -460,7 +460,7 @@ export default function BookingModal({ onClose, initialRoom = null, initialCheck
                         )}
                       </div>
                       <div className={s.confirmContactBar}>
-                        <MapPin size={13}/> Princess Street, Giza Governorate, Egypt
+                        <MapPin size={13}/> Princess Street, Al Remaya, Kafr Nassar, Al Haram, Giza Governorate 3515001
                         <span className={s.confirmContactSep}>·</span>
                         <Phone size={13}/> +20 1034 962 229
                         <span className={s.confirmContactSep}>·</span>
