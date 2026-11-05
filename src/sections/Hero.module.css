@@ -10,6 +10,8 @@
   justify-content: flex-end;
   overflow: hidden;
   background: #0a1220;
+  height: 100dvh;
+  min-height: 600px;
 }
 
 /* ── Desktop booking bar ── */
@@ -20,14 +22,12 @@
   flex-shrink: 0;
 }
 
-/* ── Mobile hero block (hidden on desktop) ── */
-.mobileHero { display: none; }
-.mobileLogo { display: none; }
+/* ── Mobile elements hidden on desktop ── */
+.mobileHero  { display: none; }
+.mobileLogo  { display: none; }
 .mobileBooking { display: none; }
 
-/* ════════════════════════════════
-   DESKTOP (>768px)
-   ════════════════════════════════ */
+/* ── Desktop background image ── */
 .bgDesktop {
   position: absolute;
   inset: 0;
@@ -38,11 +38,6 @@
   display: block;
 }
 
-.hero {
-  height: 100dvh;
-  min-height: 600px;
-}
-
 /* ════════════════════════════════
    MOBILE (≤768px)
    ════════════════════════════════ */
@@ -50,51 +45,44 @@
   .hero {
     height: auto;
     min-height: unset;
-    background: #0a1220;
-    /* Start from top of page — behind navbar */
-    margin-top: 0;
-    padding-top: 0;
+    background: #F5E6C8;
   }
 
-  /* Hide desktop image and its booking bar */
-  .bgDesktop { display: none; }
+  /* Hide desktop elements */
+  .bgDesktop  { display: none; }
   .bookingBar { display: none; }
 
-  /* Show mobile block */
+  /* Mobile wrapper */
   .mobileHero {
-    display: block;
-    position: relative;
+    display: flex;
+    flex-direction: column;
     width: 100%;
   }
 
-  /* Portrait image fills full width, starts from very top (behind navbar) */
+  /* Image sits right below navbar — no gap, no overlap */
   .mobileLogo {
     display: block;
     width: 100%;
     height: auto;
-    object-fit: contain;
-    object-position: center top;
-    /* Pull image up to sit behind the fixed navbar */
-    margin-top: -76px;
-    padding-top: 76px;
+    object-fit: cover;
+    flex-shrink: 0;
   }
 
-  /* Booking bar overlaid at bottom of the image */
+  /* Booking bar — clean cream background, no dark overlay */
   .mobileBooking {
     display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    padding: 0 0 12px;
-    background: linear-gradient(to top, rgba(10,16,26,.85) 0%, transparent 100%);
+    width: 100%;
+    background: #F5E6C8;
+    padding: 0;
   }
 }
 
 /* ── Landscape phone ── */
 @media (max-height: 500px) and (orientation: landscape) {
-  .hero { height: 100dvh; min-height: 300px; }
+  .hero {
+    height: 100dvh;
+    min-height: 300px;
+  }
   .bgDesktop {
     display: block;
     position: absolute;

@@ -5,30 +5,31 @@
 /* ── Desktop: absolute floating bar inside hero ── */
 .wrap {
   position: absolute;
-  bottom: 48px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 20px;
+  left: 24px;
+  transform: none;
   z-index: 20;
-  width: calc(100% - 96px);
-  max-width: 960px;
+  width: calc(65% - 48px);
+  max-width: 680px;
   animation: slideUp .8s .4s cubic-bezier(.4,0,.2,1) both;
 }
 
 @keyframes slideUp {
-  from { opacity:0; transform:translateX(-50%) translateY(22px); }
-  to   { opacity:1; transform:translateX(-50%) translateY(0); }
+  from { opacity:0; transform:translateY(22px); }
+  to   { opacity:1; transform:translateY(0); }
 }
 
 /* ── bar ── */
 .bar {
-  background: #FAF2E7;
+  background: rgba(250,242,231,.92);
   border-radius: 60px;
-  padding: 0 10px 0 8px;
+  padding: 0 6px 0 4px;
   display: flex;
   align-items: center;
-  height: 66px;
-  box-shadow: 0 16px 56px rgba(26,41,64,.24), 0 2px 8px rgba(26,41,64,.08);
+  height: 46px;
+  box-shadow: 0 8px 32px rgba(26,41,64,.2);
   border: 1px solid rgba(221,198,157,.4);
+  backdrop-filter: blur(8px);
 }
 
 /* ── field ── */
@@ -36,8 +37,8 @@
   flex: 1;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 0 20px;
+  gap: 8px;
+  padding: 0 14px;
   cursor: pointer;
   position: relative;
   height: 100%;
@@ -58,17 +59,17 @@
   min-width: 0;
 }
 .fieldLbl {
-  font-size: 10px; font-weight: 700;
-  letter-spacing: .18em; text-transform: uppercase;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
   color: var(--brown); opacity: .4;
   white-space: nowrap;
 }
 .fieldVal {
-  font-size: 13px; font-weight: 600;
+  font-size: 12px; font-weight: 600;
   color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .fieldPlaceholder {
-  font-size: 13px; color: rgba(77,51,35,.3); white-space: nowrap;
+  font-size: 12px; color: rgba(77,51,35,.3); white-space: nowrap;
 }
 
 /* code input */
@@ -82,7 +83,7 @@
 
 /* divider */
 .divider {
-  width: 1px; height: 28px;
+  width: 1px; height: 22px;
   background: rgba(77,51,35,.12);
   flex-shrink: 0;
 }
@@ -157,9 +158,9 @@
 .bookBtn {
   flex-shrink: 0;
   background: var(--gold); color: var(--navy);
-  font-size: 11px; font-weight: 800; letter-spacing: .22em;
-  padding: 0 28px; height: 50px; border-radius: 40px; border: none;
-  cursor: pointer; white-space: nowrap; margin-left: 8px;
+  font-size: 10px; font-weight: 800; letter-spacing: .18em;
+  padding: 0 20px; height: 38px; border-radius: 40px; border: none;
+  cursor: pointer; white-space: nowrap; margin-left: 6px;
   box-shadow: 0 4px 18px rgba(185,137,65,.4);
   transition: background .25s, transform .2s, box-shadow .2s;
   font-family: inherit;
@@ -170,13 +171,7 @@
 }
 
 /* ── Modify button ── */
-.modifyBtn {
-  flex-shrink: 0;
-  display: flex; align-items: center; gap: 5px;
-  background: none; border: none; cursor: pointer;
-  padding: 0 14px 0 10px;
-  color: var(--navy); opacity: .45; transition: opacity .2s;
-}
+.modifyBtn { display: none; }
 .modifyBtn:hover { opacity: .85; }
 .modifyBtn span {
   font-size: 10px; font-weight: 700;
@@ -265,9 +260,7 @@
     width: 100% !important;
     max-width: 100% !important;
     padding: 8px 12px 12px;
-    background: rgba(10,16,30,.6);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: transparent;
   }
   .bar {
     border-radius: 12px;
