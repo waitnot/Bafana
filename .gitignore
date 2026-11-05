@@ -2,3 +2,17 @@
 node_modules
 .next
 out
+
+# Large image assets - served from Vite project's public on Vercel
+src/assets/slide-*.jpg
+src/assets/slide-*.png
+src/assets/*.jpeg
+src/assets/rooms/**/*.jpg
+src/assets/rooms/**/*.jpeg
+src/assets/rooms/**/*.tmp
+src/assets/brand/*.png
+src/assets/brand/*.pdf
+src/assets/*.pdf
+src/assets/*.zip
+public/rooms/**/*.heic
+public/rooms/**/*.HEIC
