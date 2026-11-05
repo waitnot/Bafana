@@ -1,0 +1,58 @@
+.section {
+  background: var(--navy);
+  padding: 100px 0 120px;
+  position: relative;
+  overflow: hidden;
+}
+.section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 80%, rgba(185,137,65,.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+  position: relative; z-index: 2;
+}
+
+/* ornament */
+.orn { display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:20px; }
+.oLine { width:44px; height:1px; background:rgba(185,137,65,.35); }
+.oDot  { width:5px; height:5px; background:var(--gold); transform:rotate(45deg); flex-shrink:0; }
+
+.eyebrow {
+  font-size: .82rem; font-weight: 600;
+  letter-spacing: .28em; text-transform: uppercase;
+  color: var(--gold); text-align: center; margin-bottom: 10px;
+}
+.heading {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 400; color: var(--cream);
+  text-align: center; margin-bottom: 52px;
+  letter-spacing: .04em;
+}
+
+/* Elfsight widget container */
+.widgetWrap {
+  width: 100%;
+  min-height: 300px;
+}
+
+/* Override Elfsight default styles to match dark theme */
+.widgetWrap :global(.eapps-google-reviews-title) { display: none; }
+
+@media (max-width: 768px) {
+  .section { padding: 64px 0 80px; }
+  .inner { padding: 0 24px; }
+  .heading { margin-bottom: 36px; }
+}
+@media (max-width: 480px) {
+  .section { padding: 48px 0 64px; }
+  .inner { padding: 0 16px; }
+}
+@media (max-width: 380px) {
+  .inner { padding: 0 14px; }
+}

@@ -1,0 +1,67 @@
+/* ─── Brand Palette (from BAFANA HOTELS brand files) ────── */
+:root {
+  --cream:      #F0E8E0;
+  --beige:      #D8C8A0;
+  --navy:       #203048;
+  --teal:       #104850;
+  --brown:      #483020;
+  --gold:       #B88840;
+  --terracotta: #B06840;
+}
+
+/* ─── Reset ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 20px; }
+
+/* Scale down root font on tablets and phones */
+@media (max-width: 1024px) { html { font-size: 18px; } }
+@media (max-width: 768px)  { html { font-size: 16px; } }
+@media (max-width: 480px)  { html { font-size: 15px; } }
+@media (max-width: 380px)  { html { font-size: 14px; } }
+
+body {
+  font-family: 'Times New Roman', Times, serif;
+  background: #F0E8E0;
+  color: var(--brown);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Times New Roman', Times, serif;
+  color: var(--navy);
+  line-height: 1.1;
+  font-weight: 300;
+}
+
+/* Calligraphy — use for decorative accent text */
+.script {
+  font-family: 'Great Vibes', cursive;
+  font-weight: 400;
+}
+
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+button { cursor: pointer; border: none; font-family: 'Times New Roman', Times, serif; background: none; }
+
+/* Force Times New Roman on all form elements (browsers override otherwise) */
+input, textarea, select, option {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #FAF2E7; }
+::-webkit-scrollbar-thumb { background: var(--gold); }
+
+/* ─── Utilities ──────────────────────────────────────────── */
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 24px; }
+}

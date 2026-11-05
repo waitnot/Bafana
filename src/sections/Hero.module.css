@@ -1,0 +1,85 @@
+/* ══════════════════════════════════
+   Hero
+   ══════════════════════════════════ */
+
+.hero {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  background: #0a1220;
+}
+
+/* ── Booking bar ── */
+.bookingBar {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* ════════════════════════════════
+   DESKTOP (>768px) — landscape image, full viewport height
+   ════════════════════════════════ */
+.bgDesktop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+.bgMobile {
+  display: none;
+}
+
+.hero {
+  height: 100dvh;
+  min-height: 600px;
+}
+
+/* ════════════════════════════════
+   MOBILE (≤768px) — portrait image, show fully
+   ════════════════════════════════ */
+@media (max-width: 768px) {
+  .hero {
+    height: auto;
+    min-height: unset;
+  }
+
+  /* Hide desktop image */
+  .bgDesktop {
+    display: none;
+  }
+
+  /* Show mobile portrait image fully */
+  .bgMobile {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center top;
+  }
+}
+
+/* ── Landscape phone ── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    height: 100dvh;
+    min-height: 300px;
+  }
+  .bgDesktop {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .bgMobile { display: none; }
+}
