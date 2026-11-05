@@ -26,7 +26,7 @@ export default function Navbar({ onBook }) {
     window.addEventListener('scroll', fn)
     return () => window.removeEventListener('scroll', fn)
   }, [])
-  useEffect(() => setOpen(false), [loc])
+  useEffect(() => setOpen(false), [pathname])
 
   return (
     <header className={[s.nav, isHome && !scrolled ? s.glass : s.solid, scrolled ? s.shadow : ''].join(' ')}>
