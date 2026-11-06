@@ -36,50 +36,52 @@
 
 /* ════════════════════════════════
    MOBILE (≤768px)
-   Image behind navbar, booking bar overlaid at bottom of image
+   Full viewport height, image as bg-cover, booking panel overlaid
    ════════════════════════════════ */
 @media (max-width: 768px) {
-  /* Hero section resets */
   .hero {
-    height: auto;
-    min-height: unset;
-    background: transparent;
+    /* Fill exactly one phone screen */
+    height: 100dvh;
+    min-height: 500px;
+    background: #0a1220;
   }
+
+  /* Hide desktop elements */
   .bgDesktop  { display: none; }
   .bookingBar { display: none; }
 
-  /* Mobile container — position:relative so booking bar can be absolute inside */
+  /* Mobile wrapper fills full hero */
   .mobileHero {
     display: block;
-    position: relative;
-    width: 100%;
+    position: absolute;
+    inset: 0;
   }
 
-  /* Image starts from very top of page (behind fixed navbar) */
+  /* Image as background — covers full area, shifted to show more building */
   .mobileLogo {
     display: block;
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
-    /* Pull up by navbar height so image starts at y=0 */
-    margin-top: -76px;
-    object-position: center 80%;
+    height: 100%;
+    object-fit: cover;
+    /* 75% = building is centred, less sky visible at top */
+    object-position: center 75%;
   }
 
-  /* Booking bar — positioned high enough so all fields are fully visible */
+  /* Booking panel — fixed distance from bottom so it's always fully visible */
   .mobileBooking {
     display: block;
     position: absolute;
-    bottom: 60px;
-    left: 0;
-    right: 0;
+    bottom: 24px;
+    left: 12px;
+    right: 12px;
     z-index: 20;
-    padding: 0 12px;
   }
 }
 
 /* Landscape phone */
 @media (max-height: 500px) and (orientation: landscape) {
-  .hero { height: 100dvh; min-height: 300px; }
   .bgDesktop { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .mobileHero { display: none; }
   .bookingBar { display: block; }
