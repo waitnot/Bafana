@@ -125,7 +125,10 @@
     font-weight: 700;
     color: #fff;
     letter-spacing: .08em;
-    text-shadow: 0 2px 8px rgba(0,0,0,.6);
+    text-shadow:
+      0 1px 3px rgba(0,0,0,.9),
+      0 2px 8px rgba(0,0,0,.7),
+      0 4px 16px rgba(0,0,0,.5);
     line-height: 1;
     text-align: center;
   }
@@ -135,7 +138,10 @@
     font-weight: 400;
     color: rgba(255,255,255,.95);
     letter-spacing: .16em;
-    text-shadow: 0 2px 8px rgba(0,0,0,.6);
+    text-shadow:
+      0 1px 3px rgba(0,0,0,.9),
+      0 2px 8px rgba(0,0,0,.7),
+      0 4px 16px rgba(0,0,0,.5);
     line-height: 1;
     text-align: center;
   }
