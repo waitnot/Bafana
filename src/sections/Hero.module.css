@@ -79,12 +79,13 @@
     right: 16px;
     z-index: 15;
     font-family: 'Times New Roman', Times, serif;
-    font-size: clamp(1.6rem, 7vw, 2.2rem);
+    font-size: clamp(2rem, 9vw, 2.8rem);
     font-weight: 700;
     color: #fff;
     line-height: 1.15;
     text-shadow: 0 2px 12px rgba(0,0,0,.5), 0 4px 24px rgba(0,0,0,.3);
-    letter-spacing: .01em;
+    letter-spacing: .02em;
+    text-transform: uppercase;
   }
 
   /* Booking panel — fixed distance from bottom so it's always fully visible */
