@@ -1,6 +1,6 @@
 import desktopImg from '../assets/sunset.png'
 import mobileImg from '../assets/hero-mobile-logo.png'
-import mobileBrandLogo from '../assets/bp-logo.png'
+import mobileBrandLogo from '../assets/mobile-brand-logo.png'
 import BookingBar from '../components/BookingBar'
 import s from './Hero.module.css'
 
