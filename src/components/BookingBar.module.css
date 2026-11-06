@@ -259,7 +259,7 @@
     animation: none !important;
     width: 100% !important;
     max-width: 100% !important;
-    padding: 8px 12px 12px;
+    padding: 0;
     background: transparent;
   }
   .bar {
@@ -268,9 +268,9 @@
     padding: 8px 8px 8px;
     flex-wrap: wrap;
     gap: 6px;
-    box-shadow: none;
-    background: rgba(250,242,231,.95);
-    border: 1px solid rgba(185,137,65,.2);
+    box-shadow: 0 4px 24px rgba(0,0,0,.15);
+    background: #FAF2E7;
+    border: 1px solid rgba(185,137,65,.3);
   }
   .divider { display: none; }
   .fieldCode { display: none; }
