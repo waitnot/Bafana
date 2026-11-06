@@ -97,6 +97,47 @@
     right: 12px;
     z-index: 20;
   }
+
+  /* Logo + brand text above booking bar — right aligned, logo on top */
+  .mobileBrand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    margin-bottom: 12px;
+    padding-right: 4px;
+  }
+  .mobileBrandLogo {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,.5));
+  }
+  .mobileBrandText {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
+  .mobileBrandName {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: .2em;
+    text-shadow: 0 1px 8px rgba(0,0,0,.6);
+    line-height: 1;
+  }
+  .mobileBrandSub {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: .75rem;
+    font-weight: 400;
+    color: rgba(255,255,255,.9);
+    letter-spacing: .24em;
+    text-shadow: 0 1px 8px rgba(0,0,0,.6);
+    line-height: 1;
+  }
 }
 
 /* Landscape phone */

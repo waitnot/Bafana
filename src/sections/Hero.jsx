@@ -1,5 +1,6 @@
 import desktopImg from '../assets/sunset.png'
 import mobileImg from '../assets/hero-mobile-logo.png'
+import mobileBrandLogo from '../assets/mobile-brand-logo.png'
 import BookingBar from '../components/BookingBar'
 import s from './Hero.module.css'
 
@@ -24,6 +25,14 @@ export default function Hero({ onBook }) {
         </p>
         {/* Booking bar at bottom */}
         <div className={s.mobileBooking}>
+          {/* Logo + brand text above booking bar, right-aligned */}
+          <div className={s.mobileBrand}>
+            <img src={mobileBrandLogo} alt="Bafana Pyramids" className={s.mobileBrandLogo} />
+            <div className={s.mobileBrandText}>
+              <span className={s.mobileBrandName}>BAFANA PYRAMIDS</span>
+              <span className={s.mobileBrandSub}>HOTEL & SPA</span>
+            </div>
+          </div>
           <BookingBar onBook={onBook} />
         </div>
       </div>
