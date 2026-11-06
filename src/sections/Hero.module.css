@@ -98,14 +98,13 @@
     z-index: 20;
   }
 
-  /* Logo + brand text above booking bar — right aligned, logo on top */
+  /* Logo + brand text above booking bar — centered, logo on top */
   .mobileBrand {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     gap: 6px;
     margin-bottom: 12px;
-    padding-right: 4px;
   }
   .mobileBrandLogo {
     width: 64px;
@@ -117,26 +116,28 @@
   .mobileBrandText {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     gap: 2px;
   }
   .mobileBrandName {
     font-family: 'Times New Roman', Times, serif;
-    font-size: 1.15rem;
+    font-size: 1.35rem;
     font-weight: 700;
     color: #fff;
     letter-spacing: .2em;
     text-shadow: 0 1px 8px rgba(0,0,0,.6);
     line-height: 1;
+    text-align: center;
   }
   .mobileBrandSub {
     font-family: 'Times New Roman', Times, serif;
-    font-size: .75rem;
+    font-size: .88rem;
     font-weight: 400;
     color: rgba(255,255,255,.9);
     letter-spacing: .24em;
     text-shadow: 0 1px 8px rgba(0,0,0,.6);
     line-height: 1;
+    text-align: center;
   }
 }
 
