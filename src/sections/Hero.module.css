@@ -33,6 +33,7 @@
 .mobileHero    { display: none; }
 .mobileLogo    { display: none; }
 .mobileBooking { display: none; }
+.mobileText    { display: none; }
 
 /* ════════════════════════════════
    MOBILE (≤768px)
@@ -67,6 +68,23 @@
     object-fit: cover;
     /* 75% = building is centred, less sky visible at top */
     object-position: center 75%;
+  }
+
+  /* Hero text — top left over the image */
+  .mobileText {
+    display: block;
+    position: absolute;
+    top: 90px;
+    left: 16px;
+    right: 16px;
+    z-index: 15;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    text-shadow: 0 2px 12px rgba(0,0,0,.5), 0 4px 24px rgba(0,0,0,.3);
+    letter-spacing: .01em;
   }
 
   /* Booking panel — fixed distance from bottom so it's always fully visible */

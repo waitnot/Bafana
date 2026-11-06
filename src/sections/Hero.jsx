@@ -13,10 +13,16 @@ export default function Hero({ onBook }) {
         <BookingBar onBook={onBook} />
       </div>
 
-      {/* ── Mobile: portrait image with booking bar overlaid at bottom ── */}
+      {/* ── Mobile: portrait image with text + booking bar ── */}
       <div className={s.mobileHero}>
         <img src={mobileImg} alt="Bafana Pyramids Hotel & Spa" className={s.mobileLogo} />
-        {/* Booking bar sits ON TOP of the image at the bottom */}
+        {/* Text top-left over the image */}
+        <p className={s.mobileText}>
+          Your Gateway to<br />
+          Egypt's Timeless<br />
+          Wonders
+        </p>
+        {/* Booking bar at bottom */}
         <div className={s.mobileBooking}>
           <BookingBar onBook={onBook} />
         </div>
