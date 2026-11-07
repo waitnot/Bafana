@@ -117,22 +117,6 @@ function RoomsTab({ token }) {
     } catch (e) { alert('Install failed: ' + e.message) }
   }
 
-  const load = useCallback(async () => {
-    try {
-      const r = await fetch(`${API}/rooms`, { headers })
-      if (!r.ok) {
-        console.error('Rooms API error:', r.status, await r.text())
-        setRooms([])
-        return
-      }
-      const d = await r.json()
-      setRooms(Array.isArray(d) ? d : [])
-    } catch (e) {
-      console.error('Rooms fetch failed:', e)
-      setRooms([])
-    }
-  }, [token])
-
   useEffect(() => { load() }, [load])
 
   const save = async () => {
