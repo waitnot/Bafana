@@ -1,5 +1,22 @@
 <?php
-// ── Database Configuration ──
+// ── CORS — must be first, before any output ──
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '*';
+$allowed = ['https://bafanapyramidshotel.com', 'https://www.bafanapyramidshotel.com', 'http://localhost:5173', 'http://localhost:3000'];
+if (in_array($origin, $allowed)) {
+    header("Access-Control-Allow-Origin: $origin");
+} else {
+    header("Access-Control-Allow-Origin: *");
+}
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS, PATCH');
+header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+header('Access-Control-Allow-Credentials: true');
+header('Access-Control-Max-Age: 86400');
+header('Content-Type: application/json');
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
 // Replace these with your cPanel MySQL credentials
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'your_db_name');       // e.g. username_bafana
@@ -11,21 +28,12 @@ define('ADMIN_USER', 'admin');
 define('ADMIN_PASS', password_hash('bafana2026', PASSWORD_DEFAULT));
 
 // ── Site URL ──
-define('SITE_URL', 'https://bafanapyramidshotel.com');
-define('API_URL',  'https://bafanapyramidshotel.com/admin-api');
+define('SITE_URL', 'https://www.bafanapyramidshotel.com');
+define('API_URL',  'https://www.bafanapyramidshotel.com/admin-api');
 define('UPLOAD_PATH', __DIR__ . '/uploads/');
 define('UPLOAD_URL',  API_URL . '/uploads/');
 
-// ── CORS ──
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type, Authorization');
-header('Content-Type: application/json');
-
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
-    exit();
-}
+// ── CORS already set at top ──
 
 // ── DB Connection ──
 function getDB() {
