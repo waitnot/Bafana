@@ -8,6 +8,7 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import Amenities from './pages/Amenities'
 import Admin from './pages/Admin'
+import AdminCMS from './pages/AdminCMS'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -51,6 +52,7 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/admin" element={<Admin />} />
+        <Route path="/cms"   element={<AdminCMS />} />
         <Route path="/*"     element={<AppShell />} />
       </Routes>
     </Router>
