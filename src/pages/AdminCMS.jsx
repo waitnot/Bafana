@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import logoImg from '../assets/bp-logo.png'
 
 // ── API base — update this to your cPanel domain ──
-const API = 'https://www.bafanapyramidshotel.com/admin-api'
+const API = 'https://bafanapyramidshotel.com/admin-api'
 // For local testing: const API = 'http://localhost/admin-api'
 
 const PASS = 'bafana2026' // local fallback admin
