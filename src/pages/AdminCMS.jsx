@@ -91,16 +91,46 @@ function RoomsTab({ token }) {
   const [editing, setEditing]   = useState(null)
   const [expanded, setExpanded] = useState(null)
   const [uploading, setUploading] = useState(false)
+  const [apiError, setApiError]   = useState('')
   const fileRef = useRef()
 
   const headers = { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' }
 
   const load = useCallback(async () => {
+    setApiError('')
     try {
       const r = await fetch(`${API}/rooms`, { headers })
+      const text = await r.text()
+      let d
+      try { d = JSON.parse(text) } catch { setApiError(`API error: ${text.slice(0,200)}`); setRooms([]); return }
+      if (!r.ok) { setApiError(`API error ${r.status}: ${d?.error||text.slice(0,100)}`); setRooms([]); return }
+      setRooms(Array.isArray(d) ? d : [])
+    } catch (e) { setApiError(`Cannot reach API: ${e.message}`); setRooms([]) }
+  }, [token])
+
+  const installDB = async () => {
+    try {
+      const r = await fetch(`${API}/install`, { headers })
+      const d = await r.json()
+      alert(d.message || d.error || 'Done')
+      load()
+    } catch (e) { alert('Install failed: ' + e.message) }
+  }
+
+  const load = useCallback(async () => {
+    try {
+      const r = await fetch(`${API}/rooms`, { headers })
+      if (!r.ok) {
+        console.error('Rooms API error:', r.status, await r.text())
+        setRooms([])
+        return
+      }
       const d = await r.json()
       setRooms(Array.isArray(d) ? d : [])
-    } catch { setRooms([]) }
+    } catch (e) {
+      console.error('Rooms fetch failed:', e)
+      setRooms([])
+    }
   }, [token])
 
   useEffect(() => { load() }, [load])
@@ -138,11 +168,24 @@ function RoomsTab({ token }) {
     <div>
       <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:20 }}>
         <p style={{ fontSize:13, color:'#6B7280' }}>{rooms.length} rooms</p>
-        <button onClick={() => setEditing({ name:'', type:'', description:'', beds:'', area:'', perfect_for:'', sort_order:0 })}
-          style={{ background:'#111827', color:'#fff', padding:'8px 18px', borderRadius:6, fontSize:13, fontWeight:600, border:'none', cursor:'pointer' }}>
-          + Add Room
-        </button>
+        <div style={{ display:'flex', gap:8 }}>
+          <button onClick={installDB}
+            style={{ background:'#EFF6FF', color:'#1D4ED8', border:'1px solid #BFDBFE', padding:'8px 14px', borderRadius:6, fontSize:12, fontWeight:600, cursor:'pointer' }}>
+            ⚙ Setup DB
+          </button>
+          <button onClick={() => setEditing({ name:'', type:'', description:'', beds:'', area:'', perfect_for:'', sort_order:0 })}
+            style={{ background:'#111827', color:'#fff', padding:'8px 18px', borderRadius:6, fontSize:13, fontWeight:600, border:'none', cursor:'pointer' }}>
+            + Add Room
+          </button>
+        </div>
       </div>
+
+      {apiError && (
+        <div style={{ background:'#FEF2F2', border:'1px solid #FECACA', borderRadius:8, padding:'12px 16px', marginBottom:16, fontSize:13, color:'#B91C1C' }}>
+          <strong>Error:</strong> {apiError}
+          <br/><span style={{ fontSize:11, marginTop:4, display:'block', color:'#9CA3AF' }}>Make sure admin-api/ is uploaded to cPanel and DB is installed. Click "⚙ Setup DB" above.</span>
+        </div>
+      )}
 
       {/* Edit form */}
       {editing && (
