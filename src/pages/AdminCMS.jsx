@@ -2,7 +2,8 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import logoImg from '../assets/bp-logo.png'
 
 // ── API base — update this to your cPanel domain ──
-const API = 'https://bafanapyramidshotel.com/admin-api'
+// Use relative URL - works on both http and https, avoids SSL issues
+const API = '/admin-api'
 // For local testing: const API = 'http://localhost/admin-api'
 
 const PASS = 'bafana2026' // local fallback admin
