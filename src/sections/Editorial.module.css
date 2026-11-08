@@ -1,4 +1,4 @@
-.section { width: 100%; }
+﻿.section { width: 100%; }
 
 /* ── row ── */
 .row {
@@ -54,7 +54,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('../assets/pattern3.png');
+  background-image: url('../assets/pattern3.jpg');
   background-size: 600px 425px;
   background-repeat: repeat;
   opacity: 0.25;
@@ -159,3 +159,4 @@
   .imgPane { min-height: 170px; }
   .textPane, .textPaneAlt { padding: 22px 14px; }
 }
+

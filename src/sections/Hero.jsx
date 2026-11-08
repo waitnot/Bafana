@@ -1,5 +1,5 @@
-import desktopImg from '../assets/sunset.png'
-import mobileImg from '../assets/hero-mobile-logo.png'
+﻿import desktopImg from '../assets/sunset.jpg'
+import mobileImg from '../assets/hero-mobile-logo.jpg'
 import mobileBrandLogo from '../assets/mobile-brand-logo.png'
 import BookingBar from '../components/BookingBar'
 import s from './Hero.module.css'
@@ -8,13 +8,13 @@ export default function Hero({ onBook }) {
   return (
     <section className={s.hero}>
 
-      {/* ── Desktop: full viewport image + booking bar at bottom ── */}
+      {/* â”€â”€ Desktop: full viewport image + booking bar at bottom â”€â”€ */}
       <img src={desktopImg} alt="Bafana Pyramids Hotel & Spa" className={s.bgDesktop} />
       <div className={s.bookingBar}>
         <BookingBar onBook={onBook} />
       </div>
 
-      {/* ── Mobile: portrait image with text + booking bar ── */}
+      {/* â”€â”€ Mobile: portrait image with text + booking bar â”€â”€ */}
       <div className={s.mobileHero}>
         <img src={mobileImg} alt="Bafana Pyramids Hotel & Spa" className={s.mobileLogo} />
         {/* Text top-left over the image */}
@@ -40,3 +40,5 @@ export default function Hero({ onBook }) {
     </section>
   )
 }
+
+

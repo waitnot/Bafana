@@ -1,4 +1,4 @@
-.section {
+﻿.section {
   background: #FAF2E7;
   padding: 128px 48px;
   text-align: center;
@@ -11,7 +11,7 @@
 .section::after {
   content:'';
   position:absolute; inset:0;
-  background-image: url('../assets/pattern3.png');
+  background-image: url('../assets/pattern3.jpg');
   background-size: 600px 425px;
   background-repeat: repeat;
   opacity: 0.25;
@@ -95,3 +95,4 @@
 @media (max-width:380px) {
   .section { padding: 40px 12px; }
 }
+

@@ -9,7 +9,7 @@ const highlights = [
 ]
 
 const facts = [
-  { icon: <Clock size={22}/>,  label: 'Open Daily',      value: '9:00 AM – 5:00 PM' },
+  { icon: <Clock size={22}/>,  label: 'Open 24 Hours',   value: 'Hotel Open 24/7' },
   { icon: <Globe size={22}/>,  label: 'Location',         value: 'Giza, Cairo, Egypt' },
   { icon: <Users size={22}/>,  label: 'Perfect For',      value: 'Families, Couples & Groups' },
   { icon: <Star size={22}/>,   label: 'UNESCO Heritage',  value: 'World Heritage Site' },

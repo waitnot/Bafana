@@ -120,7 +120,7 @@ $content = [
     ['contact', 'address', 'Princess Street, Al Remaya, Kafr Nassar, Al Haram, Giza Governorate 3515001'],
     ['contact', 'phone', '+20 1034 962 229'],
     ['contact', 'email', 'info@bafanapyramidshotel.com'],
-    ['contact', 'hours', 'Mon–Sat: 9:00 AM – 7:00 PM'],
+    ['contact', 'hours', 'Hotel: Open 24/7 | Office: 8:00 AM – 10:00 PM'],
     ['footer', 'tagline', 'Comfort. Hospitality. Timeless Experiences.'],
 ];
 $stmt = $db->prepare("INSERT IGNORE INTO site_content (section, `key`, value) VALUES (?,?,?)");
