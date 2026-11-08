@@ -1,5 +1,9 @@
 RewriteEngine On
 
+# Pass Authorization header through to PHP (Apache CGI/FastCGI strips it)
+RewriteCond %{HTTP:Authorization} .
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
 # Handle CORS preflight OPTIONS requests FIRST before any redirects
 RewriteCond %{REQUEST_METHOD} OPTIONS
 RewriteRule ^(.*)$ $1 [R=200,L]

@@ -8,7 +8,7 @@ $id     = $_GET['id'] ?? null;
 $table  = in_array($type, ['bookings','consultations','reviews']) ? $type : 'bookings';
 
 // Public POST — save submission (no auth needed)
-if ($method === 'POST' && !isset(getallheaders()['Authorization'])) {
+if ($method === 'POST' && !hasAuth()) {
     $body = json_decode(file_get_contents('php://input'), true);
     if ($table === 'bookings') {
         $stmt = $db->prepare("INSERT INTO bookings (name,email,phone,check_in,check_out,guests,room,message) VALUES (?,?,?,?,?,?,?,?)");

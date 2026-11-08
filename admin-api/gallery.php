@@ -29,7 +29,9 @@ if ($method === 'POST') {
 
 if ($method === 'DELETE') {
     if (!$id) respond(['error' => 'id required'], 400);
-    $img = $db->query("SELECT filename FROM gallery_images WHERE id=$id")->fetch();
+    $stmt = $db->prepare("SELECT filename FROM gallery_images WHERE id=?");
+    $stmt->execute([$id]);
+    $img = $stmt->fetch();
     if ($img) @unlink(UPLOAD_PATH . 'gallery/' . $img['filename']);
     $db->prepare("DELETE FROM gallery_images WHERE id=?")->execute([$id]);
     respond(['message' => 'Deleted']);

@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+﻿import { useEffect, useRef, useState } from 'react'
 import { ArrowRight, BedDouble, Maximize2, Star, Award, X, Phone, Mail } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import s from './Collection.module.css'
 
+// â”€â”€ Static fallback images (used when a room has no CMS images uploaded) â”€â”€â”€â”€
 import sqImg1  from '../assets/rooms/standard-queen/bedroom-1.jpeg'
 import sqImg2  from '../assets/rooms/standard-queen/bedroom-2.jpeg'
 import sqImg3  from '../assets/rooms/standard-queen/bedroom-3.jpeg'
@@ -16,124 +17,46 @@ import stImg1  from '../assets/rooms/standard-triple/triple-1.jpg'
 import stImg2  from '../assets/rooms/standard-triple/triple-2.jpg'
 import stImg3  from '../assets/rooms/standard-triple/triple-3.jpg'
 import efImg1  from '../assets/rooms/executive-family-suite/exec-family-1.jpg'
-
-// Executive Family Suite extra images — HEIC converted to JPEG in public/
-const execFamilyImgs = [
-  efImg1,
-  '/rooms/executive-family-suite/exec-family-2.jpg',
-  '/rooms/executive-family-suite/exec-family-3.jpg',
-]
-
-// Regal Executive Suite — 2 JPGs importable, rest served as public/ static URLs
 import reImg1  from '../assets/rooms/regal-executive-suite/regal-1.jpg'
 import reImg2  from '../assets/rooms/regal-executive-suite/regal-2.jpg'
 
-// Regal HEICs converted to JPEG and served from public/
-const regalHEIC = [
-  '/rooms/regal-executive-suite/regal-3.jpg',
-  '/rooms/regal-executive-suite/regal-4.jpg',
-  '/rooms/regal-executive-suite/regal-5.jpg',
-  '/rooms/regal-executive-suite/regal-6.jpg',
-  '/rooms/regal-executive-suite/regal-7.jpg',
-]
-// Premium Pyramid Suite — all converted to JPEG in public/
-const pyramidImgs = [
-  '/rooms/premium-pyramid-suite/pyramid-1.jpg',
-  '/rooms/premium-pyramid-suite/pyramid-2.jpg',
-  '/rooms/premium-pyramid-suite/pyramid-3.jpg',
-  '/rooms/premium-pyramid-suite/pyramid-4.jpg',
-  '/rooms/premium-pyramid-suite/pyramid-5.jpg',
-  '/rooms/premium-pyramid-suite/pyramid-6.jpg',
-  '/rooms/premium-pyramid-suite/pyramid-7.jpg',
-  '/rooms/premium-pyramid-suite/pyramid-8.jpg',
-  '/rooms/premium-pyramid-suite/pyramid-9.jpg',
-  '/rooms/premium-pyramid-suite/pyramid-10.jpg',
-  '/rooms/premium-pyramid-suite/pyramid-11.jpg',
-]
+// Static fallback image sets indexed by sort_order (1â€“7)
+const STATIC_IMAGES = {
+  1: [sqImg1, sqImg2, sqImg3],
+  2: [dkImg1, dkImg2, dkImg3],
+  3: [dtImg1, dtImg2, dtImg3],
+  4: [stImg1, stImg2, stImg3],
+  5: [efImg1, '/rooms/executive-family-suite/exec-family-2.jpg?v=2026', '/rooms/executive-family-suite/exec-family-3.jpg?v=2026'],
+  6: [reImg1, reImg2, '/rooms/regal-executive-suite/regal-3.jpg?v=2026', '/rooms/regal-executive-suite/regal-4.jpg?v=2026', '/rooms/regal-executive-suite/regal-5.jpg?v=2026', '/rooms/regal-executive-suite/regal-6.jpg?v=2026', '/rooms/regal-executive-suite/regal-7.jpg?v=2026'],
+  7: Array.from({length:11}, (_,i) => `/rooms/premium-pyramid-suite/pyramid-${i+1}.jpg?v=2026`),
+}
 
-const residences = [
-  {
-    num: '01', name: 'Standard Double Room', roomId: 'sq',
-    type: 'Comfortable & Convenient',
-    img: sqImg1, images: [sqImg1, sqImg2, sqImg3],
-    beds: '1 Double', area: 'Standard Room',
-    desc: 'An inviting accommodation designed for guests who appreciate simplicity, comfort and functionality. A relaxing setting for couples or travellers sharing a room.',
-    longDesc: 'An inviting accommodation option designed for guests who appreciate simplicity, comfort and functionality. The Standard Double Room offers a relaxing setting for couples or travellers sharing a room, with air-conditioning, private bathroom, in-room TV and complimentary Wi-Fi.',
-    highlights: ['Double Bed', 'Air Conditioning', 'Private Bathroom', 'Free Wi-Fi', 'Smart TV', 'Room Service'],
-    perfectFor: 'Couples and individual leisure travellers',
-    filter: 'Ready to Move',
-  },
-  {
-    num: '02', name: 'Deluxe Twin Room', roomId: 'dk',
-    type: 'Individual Comfort, Shared Experience',
-    img: dkImg1, images: [dkImg1, dkImg2, dkImg3],
-    beds: '2 Single', area: 'Deluxe Room',
-    desc: 'A practical choice for friends, colleagues and travellers preferring separate beds. Comfortable environment suited to shared accommodation during sightseeing holidays.',
-    longDesc: 'A practical choice for friends, colleagues and travellers preferring separate beds. The Deluxe Twin Room provides a comfortable environment suited to shared accommodation during sightseeing holidays and organised tours, with modern furnishings and all essential amenities.',
-    highlights: ['Twin Beds', 'Air Conditioning', 'Private Bathroom', 'Free Wi-Fi', 'Smart TV', 'Daily Housekeeping'],
-    perfectFor: 'Friends, colleagues and twin-sharing tour guests',
-    filter: 'Ready to Move',
-  },
-  {
-    num: '03', name: 'Deluxe Double Room', roomId: 'dt',
-    type: 'An Elevated Stay Experience',
-    img: dtImg1, images: [dtImg1, dtImg2, dtImg3],
-    beds: '1 Double', area: 'Deluxe Room',
-    desc: 'Designed for guests seeking an enhanced accommodation experience. Welcoming interiors with a relaxing atmosphere — a suitable choice for couples enjoying their Egyptian getaway.',
-    longDesc: 'Designed for guests seeking an enhanced accommodation experience, the Deluxe Double Room combines welcoming interiors with a relaxing atmosphere, making it a suitable choice for couples enjoying their Egyptian getaway. Features upgraded furnishings and a comfortable ambience.',
-    highlights: ['Double Bed', 'Air Conditioning', 'Private Bathroom', 'Free Wi-Fi', 'Smart TV', 'Enhanced Furnishings'],
-    perfectFor: 'Couples and leisure travellers',
-    filter: 'Ready to Move',
-  },
-  {
-    num: '04', name: 'Standard Triple Room', roomId: 'str',
-    type: 'More Room for Shared Memories',
-    img: stImg1, images: [stImg1, stImg2, stImg3],
-    beds: '3 Single', area: 'Triple Room',
-    desc: 'A convenient accommodation choice for three guests travelling together. Suitable for families and small groups, offering a shared setting for a comfortable stay.',
-    longDesc: 'The Standard Triple Room is a convenient accommodation choice for three guests travelling together. Suitable for families and small groups, it offers a shared setting for a comfortable stay in Giza, with all essential amenities and attentive room service.',
-    highlights: ['3 Single Beds', 'Air Conditioning', 'Private Bathroom', 'Free Wi-Fi', 'Smart TV', 'Room Service'],
-    perfectFor: 'Families, friends and triple-sharing tour guests',
-    filter: 'Ready to Move',
-  },
-  {
-    num: '05', name: 'Executive Family Suite', roomId: 'efs',
-    type: 'Togetherness Meets Comfort',
-    img: efImg1, images: execFamilyImgs,
-    beds: '2–3 Beds', area: 'Family Suite',
-    desc: 'Created for families or three guests who appreciate a suite-style accommodation experience. An inviting setting for spending time together while visiting Egypt.',
-    longDesc: 'Created for families or three guests who appreciate a suite-style accommodation experience, the Executive Family Suite Triple offers an inviting setting for spending time together while visiting Egypt. Spacious, well-appointed and designed for family comfort.',
-    highlights: ['Multiple Beds', 'Suite Living Area', 'Air Conditioning', 'Free Wi-Fi', 'Smart TV', 'Premium Bathroom', 'Room Service'],
-    perfectFor: 'Families and small groups seeking a suite category',
-    filter: 'Ready to Move',
-  },
-  {
-    num: '06', name: 'Regal Executive Suite', roomId: 'res',
-    type: 'Refined Comfort & Elegance',
-    img: reImg1, images: [reImg1, reImg2, ...regalHEIC],
-    beds: '1 King', area: 'Executive Suite',
-    desc: 'A distinguished accommodation option for guests seeking a more exclusive stay. An appealing choice for special holidays and guests who prefer an upgraded accommodation category.',
-    longDesc: 'The Regal Executive Suite presents a distinguished accommodation option for guests seeking a more exclusive stay. Its executive positioning makes it an appealing choice for special holidays and guests who prefer an upgraded accommodation category, featuring refined interiors and premium amenities.',
-    highlights: ['King Bed', 'Executive Interiors', 'Air Conditioning', 'Free Wi-Fi', 'Smart TV', 'Premium Bathroom', 'Concierge Service'],
-    perfectFor: 'Premium leisure guests, couples and special-occasion travellers',
-    filter: 'Ready to Move',
-  },
-  {
-    num: '07', name: 'Premium Pyramid Suite', roomId: 'pps',
-    type: 'An Experience Inspired by Egypt\'s Heritage',
-    img: pyramidImgs[0], images: pyramidImgs,
-    beds: '1 King', area: 'Premium Suite',
-    desc: 'The hotel\'s signature accommodation category — a distinctive stay inspired by the extraordinary heritage of Giza. Designed for travellers seeking a memorable Egyptian hotel experience.',
-    longDesc: 'The Premium Pyramid Suite represents the hotel\'s signature accommodation category, offering a distinctive stay inspired by the extraordinary heritage of Giza. Designed to appeal to travellers seeking a memorable Egyptian hotel experience, this suite provides a premium accommodation choice with exceptional service.',
-    highlights: ['King Bed', 'Signature Interiors', 'Heritage Design', 'Air Conditioning', 'Free Wi-Fi', 'Smart TV', 'Premium Bathroom', 'Butler Service'],
-    perfectFor: 'Premium travellers, special occasions and guests seeking a signature suite',
-    filter: 'Ready to Move',
-  },
-]
+// Build residences from DB room + static fallback
+function buildResidence(r, idx) {
+  const dbImages = (r.images || []).map(i => i.url)
+  const fallbackIdx = r.sort_order >= 1 && r.sort_order <= 7 ? r.sort_order : (idx + 1)
+  const images = dbImages.length > 0 ? dbImages : (STATIC_IMAGES[fallbackIdx] || [sqImg1])
+  return {
+    id:         r.id,
+    num:        String(idx + 1).padStart(2, '0'),
+    name:       r.name,
+    roomId:     `room-${r.id}`,
+    type:       r.type        || '',
+    img:        images[0]     || sqImg1,
+    images,
+    beds:       r.beds        || '',
+    area:       r.area        || '',
+    desc:       r.description || '',
+    longDesc:   r.long_description || r.description || '',
+    highlights: [],
+    perfectFor: r.perfect_for || '',
+    filter:     'All',
+  }
+}
 
 const FILTERS = ['All']
 
-/* ── scroll-reveal hook ── */
+/* â”€â”€ scroll-reveal hook â”€â”€ */
 function useReveal() {
   const ref = useRef(null)
   const [visible, setVisible] = useState(false)
@@ -150,7 +73,7 @@ function useReveal() {
   return [ref, visible]
 }
 
-/* ── Property Detail Modal ── */
+/* â”€â”€ Property Detail Modal â”€â”€ */
 function PropertyModal({ residence, onClose, onBook }) {
   useEffect(() => {
     document.body.style.overflow = 'hidden'
@@ -242,7 +165,7 @@ function PropertyModal({ residence, onClose, onBook }) {
   )
 }
 
-/* ── Card Image Slider ── */
+/* â”€â”€ Card Image Slider â”€â”€ */
 function CardSlider({ images, name }) {
   const [idx, setIdx] = useState(0)
   const [dir, setDir] = useState(null) // 'left' | 'right'
@@ -312,7 +235,7 @@ function CardSlider({ images, name }) {
           <img
             key={i}
             src={src}
-            alt={`${name} — ${i + 1}`}
+            alt={`${name} â€” ${i + 1}`}
             className={[
               s.slide,
               i === idx ? s.slideCurrent : '',
@@ -362,26 +285,41 @@ function CardSlider({ images, name }) {
 }
 
 export default function Collection({ onBook }) {
-  const [filter, setFilter] = useState('All')
-  const [selected, setSelected] = useState(null)
-  const [headRef, headVisible] = useReveal()
-  const [gridRef, gridVisible] = useReveal()
+  const [filter, setFilter]       = useState('All')
+  const [selected, setSelected]   = useState(null)
+  const [headRef, headVisible]    = useReveal()
+  const [gridRef, gridVisible]    = useReveal()
+  const [residences, setResidences] = useState([])
+  const [dbLoaded, setDbLoaded]   = useState(false)
+
+  // Fetch rooms from CMS DB on mount — timestamp bypasses CDN cache
+  useEffect(() => {
+    fetch(`/admin-api/rooms?_=${Date.now()}`)
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          setResidences(data.map((r, i) => buildResidence(r, i)))
+        }
+        setDbLoaded(true)
+      })
+      .catch(() => setDbLoaded(true))
+  }, [])
 
   const shown = residences.filter(r => filter === 'All' || r.filter === filter)
 
   return (
     <section id="collection" className={s.section}>
 
-      {/* ── Section Header ── */}
+      {/* â”€â”€ Section Header â”€â”€ */}
       <div ref={headRef} className={[s.head, headVisible ? s.headIn : ''].join(' ')}>
         <div className={s.orn}>
           <span className={s.oLine} /><span className={s.oDot} /><span className={s.oLine} />
         </div>
         <p className={s.eyebrow}>The Collection</p>
         <h2 className={s.title}>Signature <span className={s.script}>Residences</span></h2>
-        <p className={s.sub}>Each property — a statement of rarity, limited in number, infinite in elegance.</p>
+        <p className={s.sub}>Each property â€” a statement of rarity, limited in number, infinite in elegance.</p>
 
-        {/* Filter Tabs — hidden when only one category */}
+        {/* Filter Tabs â€” hidden when only one category */}
         {FILTERS.length > 1 && (
           <div className={s.filters} role="tablist" aria-label="Filter residences">
             {FILTERS.map(f => (
@@ -397,7 +335,7 @@ export default function Collection({ onBook }) {
         )}
       </div>
 
-      {/* ── Feature Ribbon ── */}
+      {/* â”€â”€ Feature Ribbon â”€â”€ */}
       <div className={s.ribbon}>
         <div className={s.ribbonInner}>
           {[...Array(2)].flatMap(() =>
@@ -410,14 +348,25 @@ export default function Collection({ onBook }) {
         </div>
       </div>
 
-      {/* ── Grid ── */}
+      {/* â”€â”€ Grid â”€â”€ */}
       <div
         ref={gridRef}
         className={[s.grid, gridVisible ? s.gridIn : ''].join(' ')}
       >
-        {shown.map((r, i) => (
+        {!dbLoaded ? (
+          // Skeleton placeholders while fetching from DB
+          Array.from({length: 7}).map((_, i) => (
+            <div key={i} className={s.card} style={{ '--i': i, opacity: 0.5 }}>
+              <div className={s.imgWrap} style={{ background: '#F3F4F6' }} />
+              <div className={s.body}>
+                <div style={{ height: 12, background: '#E5E7EB', borderRadius: 4, marginBottom: 8, width: '60%' }} />
+                <div style={{ height: 20, background: '#E5E7EB', borderRadius: 4, marginBottom: 12, width: '80%' }} />
+              </div>
+            </div>
+          ))
+        ) : shown.map((r, i) => (
           <div
-            key={r.num}
+            key={r.id || r.num}
             className={s.card}
             style={{ '--i': i }}
             onClick={() => setSelected(r)}
@@ -472,7 +421,7 @@ export default function Collection({ onBook }) {
         <Link to="/contact" className={s.ctaBtn}>
           Book Your Stay <ArrowRight size={14} />
         </Link>
-        <p className={s.ctaSub}>All room types · Special packages · Private enquiries</p>
+        <p className={s.ctaSub}>All room types Â· Special packages Â· Private enquiries</p>
       </div>
 
       {/* Modal */}
@@ -482,3 +431,4 @@ export default function Collection({ onBook }) {
     </section>
   )
 }
+

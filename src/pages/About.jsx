@@ -10,7 +10,7 @@ const milestones = [
 ]
 
 const highlights = [
-  { num:'01', title:'Location', desc:'Princes Street, Al Remaya, Giza — steps from the Great Pyramids and the Grand Egyptian Museum.' },
+  { num:'01', title:'Location', desc:'Princess Street, Al Remaya, Kafr Nassar, Al Haram, Giza Governorate 3515001 — steps from the Great Pyramids and the Grand Egyptian Museum.' },
   { num:'02', title:'Accommodation', desc:'Seven room and suite categories for couples, families, leisure travellers and organised tour groups.' },
   { num:'03', title:'Dining', desc:'Asian, authentic Egyptian and Continental cuisine, plus a Rooftop Lounge Restaurant.' },
   { num:'04', title:'Connectivity', desc:'Close to the Great Pyramids, The Sphinx, Grand Egyptian Museum and Cairo City attractions.' },

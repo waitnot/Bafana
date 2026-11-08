@@ -1,93 +1,94 @@
 /**
- * API helper — posts to Vercel serverless functions
- * All endpoints live at /api/*
+ * API helper — posts to PHP/MySQL backend at /admin-api
+ * Previously pointed at /api/* (Vercel/Neon) — now fixed to use the cPanel PHP backend
+ * which is what the CMS reads from.
  */
 
-const BASE = '/api'
+const BASE = '/admin-api'
 
 export async function postBooking(data) {
-  const res = await fetch(`${BASE}/bookings`, {
+  const res = await fetch(`${BASE}/bookings?type=bookings`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   })
+  if (!res.ok) throw new Error(`HTTP ${res.status}`)
   return res.json()
 }
 
 export async function postConsultation(data) {
-  const res = await fetch(`${BASE}/consultations`, {
+  const res = await fetch(`${BASE}/bookings?type=consultations`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   })
+  if (!res.ok) throw new Error(`HTTP ${res.status}`)
   return res.json()
 }
 
 export async function postReview(data) {
-  const res = await fetch(`${BASE}/reviews`, {
+  const res = await fetch(`${BASE}/bookings?type=reviews`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   })
+  if (!res.ok) throw new Error(`HTTP ${res.status}`)
   return res.json()
 }
 
 export async function getBookings() {
-  const res = await fetch(`${BASE}/bookings`)
+  const res = await fetch(`${BASE}/bookings?type=bookings`)
   return res.json()
 }
 
 export async function getConsultations() {
-  const res = await fetch(`${BASE}/consultations`)
+  const res = await fetch(`${BASE}/bookings?type=consultations`)
   return res.json()
 }
 
 export async function getReviews() {
-  const res = await fetch(`${BASE}/reviews`)
+  const res = await fetch(`${BASE}/bookings?type=reviews`)
   return res.json()
 }
 
 export async function updateBookingStatus(id, status) {
-  await fetch(`${BASE}/bookings`, {
-    method: 'PATCH',
+  await fetch(`${BASE}/bookings?type=bookings&id=${id}&_method=PATCH`, {
+    method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id, status }),
+    body: JSON.stringify({ status }),
   })
 }
 
 export async function updateConsultationStatus(id, status) {
-  await fetch(`${BASE}/consultations`, {
-    method: 'PATCH',
+  await fetch(`${BASE}/bookings?type=consultations&id=${id}&_method=PATCH`, {
+    method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id, status }),
+    body: JSON.stringify({ status }),
   })
 }
 
 export async function deleteBooking(id) {
-  await fetch(`${BASE}/bookings`, {
-    method: 'DELETE',
+  await fetch(`${BASE}/bookings?type=bookings&id=${id}&_method=DELETE`, {
+    method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id }),
   })
 }
 
 export async function deleteConsultation(id) {
-  await fetch(`${BASE}/consultations`, {
-    method: 'DELETE',
+  await fetch(`${BASE}/bookings?type=consultations&id=${id}&_method=DELETE`, {
+    method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id }),
   })
 }
 
 export async function deleteReview(id) {
-  await fetch(`${BASE}/reviews`, {
-    method: 'DELETE',
+  await fetch(`${BASE}/bookings?type=reviews&id=${id}&_method=DELETE`, {
+    method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id }),
   })
 }
 
 export async function getGoogleReviews() {
-  const res = await fetch('/api/google-reviews')
-  return res.json()
+  // Google Reviews via Elfsight widget — no API call needed
+  return []
 }

@@ -8,6 +8,8 @@ import { postConsultation } from '../hooks/useApi'
 export default function Contact() {
   const [form, setForm] = useState({ name:'', email:'', phone:'', project:'', message:'', visitDate:'' })
   const [sent, setSent] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [formError, setFormError] = useState('')
   const onChange = e => setForm({...form, [e.target.name]: e.target.value})
   const onDateConfirm = (date) => {
     if (!date) { setForm(f => ({...f, visitDate:''})); return }
@@ -45,9 +47,18 @@ export default function Contact() {
             ) : (
               <form className={s.form} onSubmit={async e => {
                 e.preventDefault()
-                saveConsultation({ ...form })
-                try { await postConsultation({ ...form }) } catch (err) { console.warn('API save failed:', err) }
-                setSent(true)
+                setSubmitting(true)
+                setFormError('')
+                try {
+                  await postConsultation({ ...form })
+                  saveConsultation({ ...form })
+                  setSent(true)
+                } catch (err) {
+                  console.error('Consultation submit failed:', err)
+                  setFormError('Something went wrong. Please try again or contact us directly by phone.')
+                } finally {
+                  setSubmitting(false)
+                }
               }}>
                 <div className={s.row2}>
                   <label className={s.field}>
@@ -85,7 +96,10 @@ export default function Contact() {
                   <Calendar onConfirm={onDateConfirm} />
                 </div>
 
-                <button type="submit" className={s.submitBtn}>Send Message</button>
+                <button type="submit" className={s.submitBtn} disabled={submitting}>
+                  {submitting ? 'Sending…' : 'Send Message'}
+                </button>
+                {formError && <p style={{ color:'#B91C1C', fontSize:13, marginTop:12, padding:'10px 14px', background:'#FEF2F2', borderRadius:6, border:'1px solid #FECACA' }}>{formError}</p>}
               </form>
             )}
           </div>

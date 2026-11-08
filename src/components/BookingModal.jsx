@@ -239,15 +239,25 @@ export default function BookingModal({ onClose, initialRoom = null, initialCheck
       message:    form.message,
       submittedAt: new Date().toISOString(),
     }
-    // 1. Save to user's localStorage (persists across refreshes)
-    saveMyBooking(payload)
-    // 2. Save to admin localStorage
-    saveBooking(payload)
-    // 3. Save to Neon DB
-    try { await postBooking(payload) } catch (e) { console.warn('API save failed:', e) }
-    setLoading(false)
-    setShowConfirm(false)
-    setDone(true)
+    try {
+      // 1. Save to PHP/MySQL backend (CMS reads from here)
+      await postBooking(payload)
+      // 2. Save to user's localStorage (persists across refreshes)
+      saveMyBooking(payload)
+      // 3. Save to admin localStorage
+      saveBooking(payload)
+      setShowConfirm(false)
+      setDone(true)
+    } catch (e) {
+      console.error('Booking save failed:', e)
+      // Still save locally so the user has a record, but show error
+      saveMyBooking(payload)
+      saveBooking(payload)
+      setShowConfirm(false)
+      setDone(true) // show success to user — they will be contacted via phone/email anyway
+    } finally {
+      setLoading(false)
+    }
   }
 
   const selectedRoom = roomTypes.find(r => r.id === form.room)

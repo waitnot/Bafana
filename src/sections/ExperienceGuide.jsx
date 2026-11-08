@@ -1,4 +1,4 @@
-import { FileText, MapPin, Compass, Camera, Star } from 'lucide-react'
+import { FileText, MapPin, Compass, Camera, Star, Clock, Users, Globe } from 'lucide-react'
 import s from './ExperienceGuide.module.css'
 
 const highlights = [
@@ -8,12 +8,20 @@ const highlights = [
   { icon: <Camera size={20}/>,   text: 'Cairo City Attractions & Markets' },
 ]
 
+const facts = [
+  { icon: <Clock size={22}/>,  label: 'Open Daily',      value: '9:00 AM – 5:00 PM' },
+  { icon: <Globe size={22}/>,  label: 'Location',         value: 'Giza, Cairo, Egypt' },
+  { icon: <Users size={22}/>,  label: 'Perfect For',      value: 'Families, Couples & Groups' },
+  { icon: <Star size={22}/>,   label: 'UNESCO Heritage',  value: 'World Heritage Site' },
+]
+
 export default function ExperienceGuide() {
   return (
     <section className={s.section}>
       <div className={s.inner}>
         <div className={s.content}>
-          {/* Left — text only, no right card */}
+
+          {/* Left — text */}
           <div className={s.left}>
             <div className={s.orn}>
               <span className={s.oLine}/><span className={s.oDot}/><span className={s.oLine}/>
@@ -38,7 +46,6 @@ export default function ExperienceGuide() {
               ))}
             </ul>
 
-            {/* Opens PDF in new tab — no download */}
             <a
               href="/Bafana-Experience.pdf"
               target="_blank"
@@ -50,6 +57,29 @@ export default function ExperienceGuide() {
             </a>
             <p className={s.hint}>Free PDF · Opens in new tab</p>
           </div>
+
+          {/* Right — attraction info cards */}
+          <div className={s.right}>
+            <div className={s.factsGrid}>
+              {facts.map((f, i) => (
+                <div key={i} className={s.factCard}>
+                  <div className={s.factIcon}>{f.icon}</div>
+                  <div className={s.factBody}>
+                    <p className={s.factLabel}>{f.label}</p>
+                    <p className={s.factValue}>{f.value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className={s.quoteBox}>
+              <p className={s.quoteText}>
+                "Giza is home to one of the seven wonders of the ancient world.
+                Stay at Bafana Pyramids and wake up moments from history."
+              </p>
+              <span className={s.quoteAuthor}>— Bafana Pyramids Hotel & Spa</span>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
