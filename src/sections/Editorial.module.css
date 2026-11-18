@@ -24,14 +24,15 @@
   flex-shrink: 0;
 }
 
-/* zoom out img1 — scale(0.82) pulls back to reveal more of the image */
+/* img1 — fill pane fully, position to show wide lobby view */
 .img1 {
-  transform: scale(0.82);
+  object-fit: cover;
+  object-position: center 30%;
   transition: transform 1s ease;
 }
-.imgPane:hover .img1 { transform: scale(0.85); }
+.imgPane:hover .img1 { transform: scale(1.03); }
 
-/* img2 keeps the standard subtle zoom on hover */
+/* img2 — standard hover zoom */
 .img2 {
   transition: transform 1s ease;
 }
