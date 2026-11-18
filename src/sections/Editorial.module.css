@@ -22,16 +22,19 @@
   object-position: center;
   display: block;
   flex-shrink: 0;
-  transition: transform 1s ease;
 }
 
-/* zoom out img1 (reception-lobby-3) so more of the image is visible */
+/* zoom out img1 — scale(0.82) pulls back to reveal more of the image */
 .img1 {
-  object-fit: contain;
-  object-position: center;
-  background: #1a1a2e;
+  transform: scale(0.82);
+  transition: transform 1s ease;
 }
-.imgPane:hover .img1,
+.imgPane:hover .img1 { transform: scale(0.85); }
+
+/* img2 keeps the standard subtle zoom on hover */
+.img2 {
+  transition: transform 1s ease;
+}
 .imgPane:hover .img2 { transform: scale(1.03); }
 
 .imgLabel {
