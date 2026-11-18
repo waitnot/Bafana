@@ -24,6 +24,13 @@
   flex-shrink: 0;
   transition: transform 1s ease;
 }
+
+/* zoom out img1 (reception-lobby-3) so more of the image is visible */
+.img1 {
+  object-fit: contain;
+  object-position: center;
+  background: #1a1a2e;
+}
 .imgPane:hover .img1,
 .imgPane:hover .img2 { transform: scale(1.03); }
 
